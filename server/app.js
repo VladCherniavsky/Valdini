@@ -29,7 +29,7 @@
 
 
    apiRoutes.get('/',function(req,res){
-     
+
     res.json({message:'Welcome to the coolest api in the world'});
 });
    apiRoutes.get('/users', function(req,res){
@@ -40,7 +40,7 @@
  });
 
    apiRoutes.post('/authenticate', function(req,res){
-     
+
     User.findOne({
         username:req.body.name
     },function(err,user){
@@ -65,6 +65,10 @@
 
     });
 });
+
+    apiRoutes.post('/register', function(req,res){
+        console.log(req.body);
+    });
 
    apiRoutes.use(function(req,res,next){
     console.log('check token');
@@ -94,7 +98,7 @@
    app.use('/api',apiRoutes);
 
    app.get('/', function(req,res){
-       
+
     res.send("Hello from app.js");
 });
 

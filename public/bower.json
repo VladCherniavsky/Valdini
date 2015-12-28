@@ -1,0 +1,22 @@
+{
+  "name": "public",
+  "homepage": "https://github.com/VladCherniavsky/Valdini",
+  "authors": [
+    "Vlad Cherniavsky"
+  ],
+  "description": "client-side",
+  "main": "",
+  "moduleType": [
+    "node",
+    "yui"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

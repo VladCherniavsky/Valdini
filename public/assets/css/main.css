@@ -25,6 +25,9 @@ body{
 	padding-top: 3rem;     
 
 }
+label{
+	font-weight:200;
+}
 form {
     display: block;
     margin-top: 0em;
