@@ -6,19 +6,17 @@
 
 
  var express     = require('express'),
-   // db          = require('./lib/mongoose'),
+   db          = require('./lib/mongoose'),
    passport    = require('passport'),
    bodyParser  = require('body-parser'),
    morgan      = require('morgan'),
    jwt         = require('jsonwebtoken'),
-   // config      = require('./config/config'),
+   config      = require('./config/config'),
    User        = require('./models/userModel');
 
 
 
    var app=express();
-
-
    var apiRoutes=express.Router();
 
    app.use(express.static(__dirname+'../../public'));
@@ -26,39 +24,63 @@
    app.use(bodyParser.json());
    app.use(morgan('dev'));
 
+apiRoutes.post('/register', function(req,res){
+        console.log(req.body);
+
+         'use strict';
+     var user = new  User({
+        username: req.body.email,
+        password: req.body.password,
+        admin:req.body.access
+    });
+     user.save(function(err){
+        if(err){
+            throw err;
+        }
+
+        console.log('User saves successfully');
+        res.json({success:true});
+    });
+
+    });
 
 
-   apiRoutes.get('/',function(req,res){
 
-    res.json({message:'Welcome to the coolest api in the world'});
-});
    apiRoutes.get('/users', function(req,res){
      'user strict';
      User.find({},function(err,users){
         res.json(users);
     });
  });
+ 
 
-   apiRoutes.post('/authenticate', function(req,res){
+
+
+   apiRoutes.post('/login', function(req,res){
+    console.log('request');
+    console.log(req.body);
 
     User.findOne({
-        username:req.body.name
+        username:req.body.email
     },function(err,user){
+
         if(err){
             throw err;
         }
         if(!user){
             res.json({success:false, message:'Authentication failed. User not found'});
         }else if(user){
+          console.log(req.body.password);
             if(user.password!=req.body.password){
                 res.json({success:false, message:'Authentication failed. Wrong password'});
             }else{
-
+                console.log('user');
+                console.log(user);
                 var token = jwt.sign(user,'vlados',{
                     expiresInMinutes:1440
                 });
 
-                res.json({success:true, message:'ok', token:token});
+                res.json({success:true, message:'ok', token:token, user:user});
             }
         }
 
@@ -66,9 +88,7 @@
     });
 });
 
-    apiRoutes.post('/register', function(req,res){
-        console.log(req.body);
-    });
+    
 
    apiRoutes.use(function(req,res,next){
     console.log('check token');
@@ -96,6 +116,8 @@
 
 
    app.use('/api',apiRoutes);
+   
+
 
    app.get('/', function(req,res){
 
@@ -129,3 +151,6 @@
 });
 
 
+/*apiRoutes.get('/',function(req,res){
+    res.json({message:'Welcome to the coolest api in the world'});
+});*/

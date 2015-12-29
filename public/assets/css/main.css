@@ -62,3 +62,36 @@ input{
 }
 
 
+/* ================TABS================
+==================================== */
+.nav-tabs>li {
+    width: 50%;
+}
+.nav-tabs>li>a{
+	margin-right:0px;
+	border-radius: 0px;
+	font-size: 2rem;
+	border-bottom: 1px solid rgb(0, 224, 224);
+
+}
+a{
+	color:black;
+}
+a:focus, a:hover {
+	color:black;
+}
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover{
+	    border-top-color: rgb(0, 224, 224);
+    border-top-style: solid;
+    border-top-width: 1px;
+    border-right-color: rgb(0, 224, 224);
+    border-right-style: solid;
+    border-right-width: 1px;
+    border-bottom-color: transparent;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-left-color: rgb(0, 224, 224);
+    border-left-style: solid;
+    border-left-width: 1px;
+    border-bottom-color: transparent
+}
