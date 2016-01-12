@@ -1,6 +1,4 @@
-/**
- * Created by vlad.cherniavsky on 18.12.2015.
- */
+
  /*jslint white: true */
 
 
@@ -9,148 +7,40 @@
    db          = require('./lib/mongoose'),
    passport    = require('passport'),
    bodyParser  = require('body-parser'),
+  methodOverride = require('method-override'),
    morgan      = require('morgan'),
    jwt         = require('jsonwebtoken'),
-   config      = require('./config/config'),
-   User        = require('./models/userModel');
+   config      = require('./config/config');
 
+   var User = require('./models/userModel');
+   var checkToken = require('./lib/checkToken');
+  
 
+   var userRouter = require('./routes/user');
 
-   var app=express();
-   var apiRoutes=express.Router();
-
-   app.use(express.static(__dirname+'../../public'));
+   var app=express(); 
+   
    app.use(bodyParser.urlencoded({extended:false}));
    app.use(bodyParser.json());
+   app.use(methodOverride());
    app.use(morgan('dev'));
+   app.use(express.static(__dirname+'../../public'));    
 
-apiRoutes.post('/register', function(req,res){
-        console.log(req.body);
-
-         'use strict';
-     var user = new  User({
-        username: req.body.email,
-        password: req.body.password,
-        admin:req.body.access
-    });
-     user.save(function(err){
-        if(err){
-            throw err;
-        }
-
-        console.log('User saves successfully');
-        res.json({success:true});
-    });
-
-    });
+   userRouter.use(checkToken);
+   app.use('/api', userRouter);
 
 
-
-   apiRoutes.get('/users', function(req,res){
-     'user strict';
+   userRouter.get('/vlad', function(req,res){
+    console.log(req.decoded);
      User.find({},function(err,users){
         res.json(users);
     });
  });
- 
-
-
-
-   apiRoutes.post('/login', function(req,res){
-    console.log('request');
-    console.log(req.body);
-
-    User.findOne({
-        username:req.body.email
-    },function(err,user){
-
-        if(err){
-            throw err;
-        }
-        if(!user){
-            res.json({success:false, message:'Authentication failed. User not found'});
-        }else if(user){
-          console.log(req.body.password);
-            if(user.password!=req.body.password){
-                res.json({success:false, message:'Authentication failed. Wrong password'});
-            }else{
-                console.log('user');
-                console.log(user);
-                var token = jwt.sign(user,'vlados',{
-                    expiresInMinutes:1440
-                });
-
-                res.json({success:true, message:'ok', token:token, user:user});
-            }
-        }
-
-
-    });
-});
-
-    
-
-   apiRoutes.use(function(req,res,next){
-    console.log('check token');
-    var token = req.body.token ||req.query.token || req.headers['x-access-token'];
-    if(token){
-        jwt.verify(token,'vlados',function(err,decoded){
-            if(err){
-                return res.json({
-                    success:false,
-                    message:'Failed to authenticate token'
-                });                
-            }else{
-                req.decoded=decoded;
-                next();
-            }
-
-        });
-    }else{
-        return res.status(403).send({
-            success:false,
-            message:'no token provided'
-        });
-    }
-});
-
-
-   app.use('/api',apiRoutes);
-   
-
-
-   app.get('/', function(req,res){
-
-    res.send("Hello from app.js");
-});
-
-   app.get('/setup', function(req,res){
-     'use strict';
-     var vlad = new  User({
-        username: "vlad",
-        password: "vlad",
-        admin:true
-    });
-     vlad.save(function(err){
-        if(err){
-            throw err;
-        }
-
-        console.log('User saves successfully');
-        res.json({success:true});
-    });
- });
-
-
-
-
 
    app.listen(3000, function(){
     'use strict';
-    console.log("server is running on port 3000");
+    console.log("server is running on port 3000");    
+
 });
 
 
-/*apiRoutes.get('/',function(req,res){
-    res.json({message:'Welcome to the coolest api in the world'});
-});*/

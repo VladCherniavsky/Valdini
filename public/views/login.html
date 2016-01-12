@@ -1,0 +1,54 @@
+<div class="login-form">		
+			
+			<ul class="nav nav-tabs">
+				<li
+					ng-class="{'active':login.tabs.loginTab}"
+					ng-click="login.tabs.loginTab = true; login.tabs.registrationTab=false">
+					<a href="#">Login to service</a>
+				</li>
+				
+				<li
+					ng-class="{'active':login.tabs.registrationTab}"
+					ng-click="login.tabs.registrationTab=true; login.tabs.loginTab = false">
+					<a href="#">Registration</a>
+				</li>
+				
+			</ul>
+			<!-- <button type="" ng-click="testHeader()">fffff</button> -->
+			<br>
+			
+
+
+		<form ng-show="login.tabs.loginTab" role="form">			
+		
+			<div class="form-group">
+				<label for="email"> Email:</label>
+				<input type="text" class="form-control" ng-model="user.email"  placeholder="Enter Email">
+			</div>
+			<div class="form-group">
+				<label for="password"> Password:</label>
+				<input type="text" class="form-control" ng-model="user.password"  placeholder="Enter password">
+			</div>
+			<br>
+			<div class="form-group">
+				<input type="submit" value="Login to..." ng-click="login.loginUser(user)" class="btn btn-default"/>
+				<input type="button" class="btn btn-default" ng-click="login.cancelUser(user)" value="cancel" />
+			</div>
+		</form>
+			<form ng-show="login.tabs.registrationTab" role="form">			
+		
+			<div class="form-group">
+				<label for="email"> Email:</label>
+				<input type="text" class="form-control" ng-model="user.email"  placeholder="Enter Email">
+			</div>
+			<div class="form-group">
+				<label for="password"> Password:</label>
+				<input type="text" class="form-control" ng-model="user.password"  placeholder="Enter password">
+			</div>
+			<br>
+			<div class="form-group">
+				<input type="submit" value="Register" ng-click="registerUser()" class="btn btn-default"/>
+				<input type="button" class="btn btn-default" ng-click="cancelUser()" value="cancel" />
+			</div>
+		</form>
+	</div>

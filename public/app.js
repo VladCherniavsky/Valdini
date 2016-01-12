@@ -1,24 +1,13 @@
 angular
 	.module('myApp', ['ui.router'])
-	.controller('mainCtrl', ['$scope','registerUserService','loginService',mainCtrl]);
+	.controller('mainCtrl', ['$scope','registerUserService','loginService','$window',mainCtrl]);
 
-	function mainCtrl($scope,registerUserService,loginService){	
+	function mainCtrl($scope,registerUserService, $window){		
+		console.log("ddd");
 	
 		
-		$scope.credentials={
-			email:'',
-			password:'',
-			clearCredentials:function(){
-				this.email='';
-				this.password='';
-			}
-		};
-		$scope.tabs={
-			loginTab:true,
-			registrationTab:false
-		};
 
-		$scope.registerUser=function (){
+		/*$scope.registerUser=function (){
 			var user = {
 				email:$scope.credentials.email,	
 				password:$scope.credentials.password
@@ -32,21 +21,8 @@ angular
 					$scope.credentials.clearCredentials();
 				});
 		};
-
-		$scope.loginUser = function(){
-			var user = {
-				email:$scope.credentials.email,	
-				password:$scope.credentials.password
-			};
-			loginService
-				.loginUser(user)
-				.then(function(res){
-					console.log(res);
-					$scope.credentials.clearCredentials();
-				});
-
-		};
-		$scope.cancelUser=function(){
-			$scope.credentials.clearCredentials();
-		}
+*/
+		
+		
+		
 	}

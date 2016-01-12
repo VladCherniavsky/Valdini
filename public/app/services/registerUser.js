@@ -1,4 +1,7 @@
-angular.module('myApp').service('registerUserService',['$http',registerUser ]);
+(function(){
+angular
+    .module('myApp')
+    .service('registerUserService',['$http',registerUser ]);
 
 
     function registerUser($http){
@@ -15,3 +18,4 @@ angular.module('myApp').service('registerUserService',['$http',registerUser ]);
             });
         };
     }
+})();
