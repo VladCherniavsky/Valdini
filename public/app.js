@@ -3,7 +3,7 @@ angular
 	.controller('mainCtrl', ['$scope','registerUserService','loginService','$window',mainCtrl]);
 
 	function mainCtrl($scope,registerUserService, $window){		
-		console.log("ddd");
+		
 	
 		
 

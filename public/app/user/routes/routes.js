@@ -13,6 +13,12 @@ angular
 				templateUrl:'views/login.html',
 				controller:'loginCtrl',
 				controllerAs:'login'
+			})
+			.state('users',{
+				url:'/users',
+				templateUrl:'views/users.html',
+				controller:'usersCtrl',
+				controllerAs:'users'
 			});
 	}
 })();

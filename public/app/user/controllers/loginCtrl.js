@@ -2,9 +2,9 @@
 (function(){
 angular
 	.module('myApp')
-	.controller('loginCtrl',['loginService','$window','$state', loginCtrlFn]);
+	.controller('loginCtrl',['loginService','$window','$state','commonService', loginCtrlFn]);
 
-	function loginCtrlFn(loginService,$window,$state){
+	function loginCtrlFn(loginService,$window,$state,commonService){
 
 		console.log('hii');
 		this.tabs={
@@ -26,6 +26,17 @@ angular
 					console.log(res);
 					//$state.go('users');				
 				});
+
+		};
+		this.checkToken = function(){
+		commonService.checkAuth().then(function(res){
+			console.log(res);
+		});
+			
+			
+		
+			
+
 
 		};
 
