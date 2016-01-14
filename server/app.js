@@ -27,49 +27,19 @@
    app.use(morgan('dev'));
    app.use(express.static(__dirname+'../../public'));  
    
-   userRouter.get('/vlad', function(req,res){
-    console.log(req.body);
-     User.find({},function(err,users){
-        res.json(users);
-    });
- });
+
+ userRouter.use(checkTokenRoute);
  app.use('/api', userRouter);
-   userRouter.post('/checkToken', function(req,res){
-  console.log('checktoken request');
-  console.log(req.body.token);
-  var token = req.body.token;
+ userRouter.use(checkToken);
 
-    
-    if(token){
-        jwt.verify(token,'vlados',function(err,decoded){
-            if(err){
 
-                return res.json({
-                    success:false,
-                    message:'Failed to authenticate token',
-                    error:err
-                });                
-            }else{
-              console.log(decoded);
-              console.log('decoded');
-                req.decoded=decoded;
-                return res.json({
-                  success:true,
-                  message:'token is valid',
-                  info:decoded
-                });
-            }
+ userRouter.get('/vlad', function(req,res){
+     console.log(req.body);
+     User.find({},function(err,users){
+         res.json(users);
+     });
+ });
 
-        });
-    }else{
-        return res.status(403).send({
-            success:false,
-            message:'no token provided'
-        });
-    }
-
-});
-   //userRouter.use(checkToken);
   
 
 

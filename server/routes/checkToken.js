@@ -7,6 +7,7 @@ var router = express.Router();
 router.post('/checkToken', function(req,res){
 	console.log('checktoken request');
 	console.log(req.body);
+    var token = req.body.token;
 
 	  
     if(token){
