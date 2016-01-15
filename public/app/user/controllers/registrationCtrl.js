@@ -6,7 +6,7 @@ angular
     .controller('registrationCtrl', ['registrationService', '$window', '$state', 'commonService', registrationFn]);
 
     function registrationFn(registrationService, $window, $state, commonService) {
-        console.log('hii');
+        console.log('registrationCtrl is called');
         var self=this;
        
         this.registerUser = function (user) {

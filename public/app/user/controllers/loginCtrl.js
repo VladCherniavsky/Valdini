@@ -6,7 +6,7 @@ angular
     .controller('loginCtrl', ['loginService', '$window', '$state', 'commonService', loginCtrlFn]);
 
     function loginCtrlFn(loginService, $window, $state, commonService) {
-        console.log('hii');
+        console.log('loginCtrl is called');
         var self = this;
       
         this.loginUser = function (user) {
