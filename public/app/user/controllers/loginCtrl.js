@@ -27,6 +27,8 @@ angular
             commonService.checkAuth().then(function (res) {
                 console.log(res);
                
+            },function(err){
+            	console.log(err);
             });
         };
         this.clearCredential=function(user){

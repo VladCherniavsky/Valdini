@@ -28,11 +28,12 @@
    app.use(morgan('dev'));
    app.use(favicon(__dirname + '../../public/assets/favicon.ico'));
    app.use(express.static(__dirname+'../../public'));  
-   
+   app.disable('etag'); 
 
- userRouter.use(checkTokenRoute); 
- userRouter.use(checkToken);
+  userRouter.use(checkTokenRoute);
+ //userRouter.use(checkToken);
  app.use('/api', userRouter);
+
 
 
  userRouter.get('/vlad', function(req,res){

@@ -11,7 +11,10 @@ router.post('/checkToken', function(req,res){
 
 	  
     if(token){
+    	console.log('after if ');
+    	console.log(token);
         jwt.verify(token,'vlados',function(err,decoded){
+        	
             if(err){
 
                 return res.json({
@@ -19,7 +22,7 @@ router.post('/checkToken', function(req,res){
                     message:'Failed to authenticate token',
                     error:err
                 });                
-            }else{
+            }else if(decoded){
             	console.log(decoded);
             	console.log('decoded');
                 req.decoded=decoded;
