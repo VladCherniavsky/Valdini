@@ -1,7 +1,7 @@
 (function(){
 angular
     .module('myApp')
-    .service('registerUserService',['$http',registerUser ]);
+    .service('registrationService',['$http',registerUser ]);
 
 
     function registerUser($http){

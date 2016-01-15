@@ -1,4 +1,4 @@
-(function(){
+/*(function(){
 angular
 	.module('myApp')
 	.controller('loginCtrl',['$state', usersCtrlFn]);
@@ -6,4 +6,4 @@ angular
 	function usersCtrlFn($state){
 		
 	}
-})();
+})();*/

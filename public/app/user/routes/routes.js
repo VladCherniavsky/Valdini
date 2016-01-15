@@ -5,20 +5,32 @@ angular
 
 	function config($stateProvider,$urlRouterProvider){
 
- $urlRouterProvider.otherwise('/login');
+ $urlRouterProvider.otherwise('/join/login');
 
 		$stateProvider
-			.state('login', {
-				url:'/login',
-				templateUrl:'views/login.html',
-				controller:'loginCtrl',
-				controllerAs:'login'
+			.state('join', {
+				url:'/join',
+				templateUrl:'views/securityForm.html',
+				controller:'authCtrl',
+				controllerAs:'auth'/*,
+				views:{
+					"content":{
+						template:"<ui-view />"
+					}
+				}*/
 			})
-			.state('users',{
-				url:'/users',
-				templateUrl:'views/users.html',
-				controller:'usersCtrl',
-				controllerAs:'users'
-			});
+			.state('join.login', {
+				url: '/login',
+				templateUrl: 'views/login.html',
+				controller: 'loginCtrl',
+				controllerAs: 'login',
+			})
+			.state('join.signup', {
+				url: '/signup',
+				templateUrl: 'views/registration.html',
+				controller: 'registrationCtrl',
+				controllerAs: 'registration',
+			});	
+			
 	}
 })();

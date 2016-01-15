@@ -10,7 +10,8 @@
   methodOverride = require('method-override'),
    morgan      = require('morgan'),
    jwt         = require('jsonwebtoken'),
-   config      = require('./config/config');
+   config      = require('./config/config'),
+   favicon = require('serve-favicon');
 
    var User = require('./models/userModel');
    var checkToken = require('./lib/checkToken');
@@ -25,12 +26,13 @@
    app.use(bodyParser.json());
    app.use(methodOverride());
    app.use(morgan('dev'));
+   app.use(favicon(__dirname + '../../public/assets/favicon.ico'));
    app.use(express.static(__dirname+'../../public'));  
    
 
- userRouter.use(checkTokenRoute);
- app.use('/api', userRouter);
+ userRouter.use(checkTokenRoute); 
  userRouter.use(checkToken);
+ app.use('/api', userRouter);
 
 
  userRouter.get('/vlad', function(req,res){

@@ -1,4 +1,6 @@
+
 (function(){
+   
 	angular
   .module('myApp')
   .service('commonService', ['$http','$window','$q', commonService]);
@@ -8,22 +10,25 @@
     var deferred = $q.defer();
     this.checkAuth = function(){
         console.log('call check auth');
+       
+        console.log(self);
         self.getToken()
             .then(function(data){
+                 
                 if(data){
-                    console.log(data);
+                   
                     
                     self.checkToken(data)
                         .then(function(res){
                             
                             if(res){
-                                console.log(res);
+                               
                                 deferred.resolve(res);
                             }
                             else{
                                 deferred.reject(new Error('no token'));
                             }
-                            console.log(deferred.promise);
+                            
                             
                         });
                     
@@ -60,6 +65,12 @@
            deferred.reject(false);
        }
        return deferred.promise;
+   };
+   this.clearObj=function(obj){
+    console.log('call clear')
+        for(var prop in obj){
+            obj[prop]='';
+        }
    };
 }
 
