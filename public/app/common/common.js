@@ -43,9 +43,11 @@
             token:token
         }
     })
-        .then(function(res){               
-
+        .then(function(res){     
+  console.log(res.data);
             return res.data;
+        },function(err){
+            console.log(err);
         });				
 
     };

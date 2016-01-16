@@ -37,7 +37,7 @@ var router = express.Router();
                     };
                     console.log(userInfo);
                     var token = jwt.sign(userInfo,'vlados',{
-                        expiresIn:'10s'
+                        expiresIn:'1h'
                     });
                     res.json({success:true, message:'ok',  user:userInfo,token:token,});
                 }

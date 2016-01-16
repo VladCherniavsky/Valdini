@@ -5,7 +5,7 @@ angular
 
 	function config($stateProvider,$urlRouterProvider){
 
- $urlRouterProvider.otherwise('/join/login');
+ $urlRouterProvider.otherwise('/');
 
 		$stateProvider
 			.state('join', {

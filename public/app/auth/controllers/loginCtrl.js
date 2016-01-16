@@ -20,6 +20,7 @@ angular
                         $window.localStorage.token = res.token;
                     console.log(res);
                     self.clearCredential(user);
+                     $state.go('users');
                     //$state.go('users');
                 });
         };

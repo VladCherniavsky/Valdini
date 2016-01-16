@@ -8,6 +8,7 @@ angular
     function registrationFn(registrationService, $window, $state, commonService) {
         console.log('registrationCtrl is called');
         var self=this;
+           console.log($state);
        
         this.registerUser = function (user) {
             console.log(user);
