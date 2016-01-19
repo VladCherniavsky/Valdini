@@ -20,7 +20,7 @@ angular
                 method:'GET',
                 url:'api/vlad',
                 headers:{
-                    'x-access-token':getToken()
+                    'x-access-token': getToken()
                 }
               
             }).then(function(res){                

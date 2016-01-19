@@ -6,11 +6,9 @@ angular
     .controller('loginCtrl', ['loginService', '$window', '$state', 'commonService', loginCtrlFn]);
 
     function loginCtrlFn(loginService, $window, $state, commonService) {
-        console.log('hii');
-        this.tabs = {
-            loginTab: true,
-            registrationTab: false
-        };
+        console.log('loginCtrl is called');
+        var self = this;
+      
         this.loginUser = function (user) {
             var credentials = {
                 email: user.email,
@@ -21,13 +19,21 @@ angular
                     .then(function (res) {
                         $window.localStorage.token = res.token;
                     console.log(res);
+                    self.clearCredential(user);
+                     $state.go('users');
                     //$state.go('users');
                 });
         };
         this.checkToken = function () {
             commonService.checkAuth().then(function (res) {
                 console.log(res);
+               
+            },function(err){
+            	console.log(err);
             });
+        };
+        this.clearCredential=function(user){
+        	commonService.clearObj(user);
         };
     }
 }) ();
