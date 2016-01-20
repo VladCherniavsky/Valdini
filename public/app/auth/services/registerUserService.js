@@ -13,7 +13,7 @@ angular
                 url:'api/register',
                 data:user
             }).then(function(res){
-                console.log(res);
+                console.log(res.locals);
                 return res;
             });
         };
