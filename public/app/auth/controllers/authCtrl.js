@@ -28,7 +28,7 @@ angular
         }
         function successHandle(data){
             if(data.success){
-                $state.go('users');
+               // $state.go('users');
             }
 
         }

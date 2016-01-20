@@ -20,17 +20,18 @@ angular
                         $window.localStorage.token = res.token;
                     console.log(res);
                     self.clearCredential(user);
-                     $state.go('users');
-                    //$state.go('users');
+                    // $state.go('users');
+
                 });
         };
         this.checkToken = function () {
-            commonService.checkAuth().then(function (res) {
-                console.log(res);
-               
-            },function(err){
-            	console.log(err);
-            });
+            commonService
+                .checkAuth()
+                .then(function (res) {
+                    console.log(res);
+                }, function (err) {
+                    console.log(err);
+                });
         };
         this.clearCredential=function(user){
         	commonService.clearObj(user);

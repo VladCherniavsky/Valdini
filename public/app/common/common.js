@@ -1,38 +1,36 @@
 
-(function(){
-   
-	angular
-  .module('myApp')
-  .service('commonService', ['$http','$window','$q', commonService]);
-
-  function commonService($http,$window,$q){
-    var self = this;
-    var deferred = $q.defer();
-    this.checkAuth = function(){
-        console.log('call check auth');
-       
-        console.log(self);
-        self.getToken()
-            .then(function(data){               
-                if(data){
-                    self.checkToken(data)
-                    .then(function(res){
-                        if(res){
-                            deferred.resolve(res);
-                        }
-                        else{
-                            deferred.reject(new Error('no token'));
-                        }
-                    });
-                    
+(function () {
+    angular
+        .module('myApp')
+        .service('commonService', ['$http','$window','$q', commonService]);
+    function commonService($http, $window, $q) {
+        var self = this;
+        var deferreddd = $q.defer();
+        self.checkAuth = function () {
+            console.log('call check auth');
+            self.getToken()
+                .then(function (token) {
+                    if (token) {
+                        self.checkToken(token)
+                            .then(function (res) {
+                                console.log(res)
+                                if (res.success) {
+                                    console.log('token resolved');
+                                    deferreddd.resolve(res);
+                                }
+                            }, function (err) {
+                                console.log(err);
+                                deferreddd.reject(err);
+                            });
                     }
-                },function(err){
+                }, function (err) {
                     console.log('no token in local storage');
                     console.log(err);
-                     deferred.reject(false);
+                    deferreddd.reject(false);
                 });
+            console.log(deferreddd.promise);
 
-            return deferred.promise;
+            return deferreddd.promise;
         };
     this.checkToken=function(token){
         console.log('call checkToken');
@@ -41,14 +39,24 @@
            url:'api/checkToken',
            data:{
             token:token
-        }
-    })
-        .then(function(res){     
-  console.log(res.data);
-            return res.data;
-        },function(err){
-            console.log(err);
-        });				
+           }
+        })
+            .then(function (res) {
+                var deferred = $q.defer();
+                console.log(res.data.success);
+                if(res.data.success) {
+                    console.log(res.data);
+                    deferred.resolve(res.data);
+                } else {
+                    console.log(res.data)
+                    deferred.reject(res.data);
+                }
+
+                return deferred.promise;
+            }, function(err){
+                console.log(err);
+                throw err;
+            });
 
     };
 

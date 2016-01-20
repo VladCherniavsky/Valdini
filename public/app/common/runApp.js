@@ -11,7 +11,7 @@ angular
                         function successHandle(data){
                            if(data.success){
                                console.log('run success');
-                               $state.go('users');
+                              // $state.go('users');
                            }else{
                                $state.go('join.login');
                            }

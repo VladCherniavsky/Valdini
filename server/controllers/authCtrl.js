@@ -57,7 +57,7 @@ exports.login = function (req, res) {
                 };
                 console.log(userInfo);
                 var token = jwt.sign(userInfo, 'vlados', {
-                    expiresIn: '10s'
+                    expiresIn: '100s'
                 });
                 res.json({success: true, message: 'ok',  user: userInfo, token: token});
             }
