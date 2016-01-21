@@ -1,0 +1,12 @@
+<nav class="navbar navbar-inverse" role="navigation" ng-controller="mainCtrl">
+    <div class="navbar-header">
+        <a class="navbar-brand" ui-sref="home" >Valdini</a>
+    </div>
+    <ul class="nav navbar-nav">
+        <li ng-show="loggedIn" ><a ui-sref="users">Users</a></li>
+    </ul>
+    <ul class="nav navbar-nav right">
+        <li  ng-hide="loggedIn"><a ui-sref="join.login">Log In</a></li>
+        <li  ng-show="loggedIn"><a href="#" ng-click="logout()">Log Out</a></li>
+    </ul>
+</nav>

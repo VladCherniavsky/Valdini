@@ -95,3 +95,18 @@ a:focus, a:hover {
     border-left-width: 1px;
     border-bottom-color: transparent
 }
+
+
+/*================NAVBAR================
+==================================== */
+.navbar {
+	border-radius: 0px;
+}
+.right {
+	float: right;
+}
+/*================info.html================
+==================================== */
+.nextBtn{
+	float:right;
+}

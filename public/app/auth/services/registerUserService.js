@@ -12,9 +12,8 @@ angular
                 method:'POST',
                 url:'api/register',
                 data:user
-            }).then(function(res){
-                console.log(res.locals);
-                return res;
+            }).then(function (res) {
+                return res.data;
             });
         };
     }

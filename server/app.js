@@ -13,6 +13,8 @@ var express     = require('express'),
     config      = require('./config/config'),
     favicon = require('serve-favicon');
 
+
+
 var User = require('./models/userModel');
 var checkToken = require('./lib/checkToken');
 var checkTokenRoute = require('./routes/checkToken');
@@ -40,6 +42,5 @@ app.use('/api', userRouter);
 app.listen(3000, function(){
     'use strict';
     console.log("server is running on port 3000");
-
 });
 

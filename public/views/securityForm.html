@@ -1,18 +1,6 @@
 <div class="login-form">
 
-	<ul class="nav nav-tabs">
-		 <li
-			ng-class="{'active':auth.tabs.loginTab}"
-			ng-click="auth.tabs.loginTab = true; auth.tabs.registrationTab=false">
-			<a ui-sref="join.login">Login to service</a>
-		</li>
-		<li
-			ng-class="{'active':auth.tabs.registrationTab}"
-			ng-click="auth.tabs.registrationTab=true; auth.tabs.loginTab = false">
-			<a ui-sref="join.signup">Sign Up</a>
-		</li>
-	</ul>
-	<br>
-	<div ui-view></div>
+	<div ui-view name="navTabs"></div>
+	<div ui-view name="main"></div>
 
 </div>

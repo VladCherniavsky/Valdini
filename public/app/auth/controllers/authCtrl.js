@@ -28,11 +28,13 @@ angular
         }
         function successHandle(data){
             if(data.success){
-               // $state.go('users');
+                $rootScope.loggedIn = true;
+                $state.go('home');
             }
 
         }
-        function errorHandle(data){
+        function errorHandle(data) {
+            $rootScope.loggedIn = false;
             $state.go('join.login');
         }
 

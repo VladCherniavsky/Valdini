@@ -1,48 +1,40 @@
 var User = require('../models/userModel'),
     jwt = require('jsonwebtoken');
 
-exports.signup = function (req, res) {
+exports.signup = function (req, res, next) {
     'use strict';
 
     console.log(req.body.email);
-    User.findOne({
-        username: req.body.email
-    }, function (err, user) {
-        if (err) {
-            console.log('err');
-            console.log(err);
-            throw err;
-        }
-        if (user) {
-            console.log(user);
-            res.json({success: false, message: 'User name already taken'});
-        } else {
-            var userModel = new User({
-                username: req.body.email,
-                password: req.body.password,
-                admin: req.body.access
-            });
-            userModel.save(function (err) {
-                if (err) {
-                    throw err;
-                }
-                console.log('User saves successfully');
-                console.log(res);
+    User.findOne({username: req.body.email})
+        .then(function (user) {
+            if (user) {
+                console.log(user);
+                res.json({success: false, message: 'This email already taken. Please choose another one'});
+            } else {
+                console.log(user);
+                var userModel = new User({
+                    username: req.body.email,
+                    password: req.body.password,
+                    admin: req.body.access
+                });
+                userModel.save(function (err, savedUser) {
+                    if (err) {
+                        next(err);
+                    }
+                    console.log('User saves successfully');
 
-                res.json({success: true, message: 'User is registered'});
-            });
-        }
-    });
+                    res.json({success: true,
+                        message: 'User is registered',
+                        user: savedUser.username
+                    });
+                });
+            }
+        }).catch(next);
 };
 
 exports.login = function (req, res) {
     console.log('login request');
-    User.findOne({
-        username: req.body.email
-    }, function (err, user) {
-        if (err) {
-            throw err;
-        }
+    User.findOne({username: req.body.email}).then(function (user) {
         if (!user) {
             res.json({success: false, message: 'Authentication failed. User not found'});
         } else if (user) {
@@ -65,11 +57,15 @@ exports.login = function (req, res) {
     });
 };
 
-exports.getAllUsers = function (req, res) {
+exports.getAllUsers = function (req, res, next) {
     'user strict';
-    User.find({}, function (err, users) {
-        res.json(users);
-    });
-};
+    User.find({})
+        .then(function (users) {
+            res.json(users);
+        }, function(err) {
+            next(err);
+        })
+        .catch(next);
+}
 
 

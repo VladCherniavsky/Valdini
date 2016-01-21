@@ -7,11 +7,12 @@ angular
 
     function usersCtrlFn(usersService) {
         var self = this;
-
-
-        usersService.getAllUsers().then(function(allUsers){
-            self.allUsers=allUsers;
-
-        });
+        self.name = 'Vlad';
+        usersService
+            .getAllUsers()
+            .then(function (allUsers) {
+                console.log(allUsers);
+                self.allUsers = allUsers;
+            });
     }
 }());

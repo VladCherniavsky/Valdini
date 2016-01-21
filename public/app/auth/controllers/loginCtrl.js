@@ -3,9 +3,9 @@
     'use strict';
 angular
     .module('myApp')
-    .controller('loginCtrl', ['loginService', '$window', '$state', 'commonService', loginCtrlFn]);
+    .controller('loginCtrl', ['loginService', '$window', '$state','$rootScope', 'commonService', loginCtrlFn]);
 
-    function loginCtrlFn(loginService, $window, $state, commonService) {
+    function loginCtrlFn(loginService, $window, $state,$rootScope, commonService) {
         console.log('loginCtrl is called');
         var self = this;
       
@@ -20,7 +20,8 @@ angular
                         $window.localStorage.token = res.token;
                     console.log(res);
                     self.clearCredential(user);
-                    // $state.go('users');
+                    $rootScope.loggedIn = true;
+                    $state.go('home');
 
                 });
         };
