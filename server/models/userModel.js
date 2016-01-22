@@ -11,6 +11,15 @@ var user = new Schema({
     },
     admin: {
         type: Boolean
+    },
+    firstName: {
+        type: String
+    },
+    lastName: {
+        type: String
+    },
+    phone: {
+        type: String
     }
 });
 var userModel = mongoose.model('User', user);

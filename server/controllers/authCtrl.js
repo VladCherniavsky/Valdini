@@ -67,5 +67,30 @@ exports.getAllUsers = function (req, res, next) {
         })
         .catch(next);
 }
+exports.addInfo = function (req, res, next){
+    console.log(req.body);
+   User.find({username: req.body.userName})
+        .then(function(user){
+            if(!user){
+                res.json({success: false, message: 'User not found'});
+            } else if (user) {
+                var upsertUser = new User({
+                    firstName:req.body.firstName,
+                    lastName: req.body.lastName,
+                    phone:req.body.phone
+                });
+
+                console.log(user);
+                User.update({_id:user._id},upsertUser, function(err, updatedUser){
+                    if (err) {
+                        return  res.json({success: false, message: 'User info not saved', username: req.body.userName});
+                    } else {
+                        return res.json({success: true, message: 'User info is saved', username: req.body.userName});
+                    }
+                });
+
+            }
+        });
+};
 
 

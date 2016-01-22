@@ -49,15 +49,26 @@
             .state('join.details',
             {
                 url: '/details',
-                controller: 'registrationCtrl',
-                controllerAs: 'registration',
                 needName: true,
                 views: {
                     main: {
-                        templateUrl: 'views/info.html'
+                        templateUrl: 'views/info.html',
+                        controller: 'registrationCtrl',
+                        controllerAs: 'registration'
                     }
                 }
-
+            })
+            .state('join.fandoms',
+            {
+                url: '/fandoms',
+                needName: true,
+                views: {
+                    main: {
+                        templateUrl: 'views/fandoms.html',
+                        controller: 'registrationCtrl',
+                        controllerAs: 'registration'
+                    }
+                }
             });
 
     }

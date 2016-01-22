@@ -1,6 +1,7 @@
 * {
 	margin: 0;
 	padding: 0;
+	box-sizing: border-box;;
 }
 
 body{
@@ -22,7 +23,8 @@ body{
 	background-color: #ffffff;  
 	padding-left: 5rem;
 	padding-right: 5rem;   
-	padding-top: 3rem;     
+	padding-top: 3rem;
+	padding-bottom: 3rem;
 
 }
 label{
@@ -59,6 +61,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 input{
 	border-radius: 0px !important;
+}
+.registrationContent{
+	position: relative;
+	height:100%
 }
 
 
@@ -109,4 +115,44 @@ a:focus, a:hover {
 ==================================== */
 .nextBtn{
 	float:right;
+	padding-bottom: 2rem;
+}
+
+/*================fandoms.html================
+==================================== */
+.fandomsForm{
+	position:relative;
+	height:100%;
+	padding-top: 40px;
+	z-index: 1;
+}
+.fandomsForm__title{
+	text-align: center;
+	position: absolute;
+	width: 100%;
+	top: 0;
+	height: 40px;
+	line-height: 40px;
+	z-index: 100;
+	margin: 0px;
+
+}
+.fandomsForm__content{
+	overflow-y: scroll;
+	overflow-x: hidden;
+	font-size: 50px;
+	position:relative;
+	width: 100%;
+	height: 90%;
+	z-index: 1;
+}
+.fandomsForm__btn{
+
+	float:right;
+	background-color:#2086bf;
+	color:white;
+	margin-top: 5px;
+	margin-bottom: 2rem;
+
+
 }
