@@ -6,12 +6,12 @@ exports.signup = function (req, res, next) {
 
     console.log(req.body.email);
     User.findOne({username: req.body.email})
-        .then(function (user) {
+        .then(function (err, user) {
             if (user) {
                 console.log(user);
                 res.json({success: false, message: 'This email already taken. Please choose another one'});
             } else {
-                console.log(user);
+
                 var userModel = new User({
                     username: req.body.email,
                     password: req.body.password,
@@ -22,10 +22,11 @@ exports.signup = function (req, res, next) {
                         next(err);
                     }
                     console.log('User saves successfully');
+                    console.log(savedUser);
 
                     res.json({success: true,
                         message: 'User is registered',
-                        user: savedUser.username
+                        user: savedUser
                     });
                 });
             }
@@ -38,6 +39,7 @@ exports.login = function (req, res) {
         if (!user) {
             res.json({success: false, message: 'Authentication failed. User not found'});
         } else if (user) {
+            console.log(user);
             console.log('password');
             if (user.password !== req.body.password) {
                 res.json({success: false, message: 'Authentication failed. Wrong password'});
@@ -61,36 +63,31 @@ exports.getAllUsers = function (req, res, next) {
     'user strict';
     User.find({})
         .then(function (users) {
+            console.log(users);
             res.json(users);
-        }, function(err) {
+        }, function (err) {
             next(err);
         })
         .catch(next);
 }
 exports.addInfo = function (req, res, next){
+    console.log('req.body');
     console.log(req.body);
-   User.find({username: req.body.userName})
-        .then(function(user){
-            if(!user){
-                res.json({success: false, message: 'User not found'});
-            } else if (user) {
-                var upsertUser = new User({
-                    firstName:req.body.firstName,
-                    lastName: req.body.lastName,
-                    phone:req.body.phone
-                });
-
-                console.log(user);
-                User.update({_id:user._id},upsertUser, function(err, updatedUser){
-                    if (err) {
-                        return  res.json({success: false, message: 'User info not saved', username: req.body.userName});
-                    } else {
-                        return res.json({success: true, message: 'User info is saved', username: req.body.userName});
-                    }
-                });
-
+    User.update(
+        {username: req.body.userName},
+        {$set: {
+            'firstName': req.body.firstName,
+            'lastName': req.body.lastName,
+            'phone': req.body.phone
+        }},
+        function(err) {
+            if (err) {
+                return  res.json({success: false, message: 'User info not saved', username:req.body.userName });
+            } else {
+                return res.json({success: true, message: 'User info is saved', username: req.body.userName});
             }
         });
+
 };
 
 

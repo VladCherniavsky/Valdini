@@ -17,12 +17,15 @@ angular
             loginService
                 .loginUser(credentials)
                     .then(function (res) {
+                    if (res.success) {
                         $window.localStorage.token = res.token;
-                    console.log(res);
-                    self.clearCredential(user);
-                    $rootScope.loggedIn = true;
-                    $state.go('home');
-
+                        console.log(res);
+                        self.clearCredential(user);
+                        $rootScope.loggedIn = true;
+                        $state.go('home');
+                    } else {
+                        $state.go('join.login');
+                    }
                 });
         };
         this.checkToken = function () {

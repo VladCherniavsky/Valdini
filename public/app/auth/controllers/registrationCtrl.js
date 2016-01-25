@@ -20,7 +20,7 @@ angular
                     .then(function (res) {
                          console.log(res);
                     self.clearCredential(user);
-                    $rootScope.userName = res.user;
+                    $rootScope.userName = res.user.username;
                     $state.go('join.details');
                 });
         };
@@ -31,7 +31,7 @@ angular
         this.addInfoToUser = function (userInfo) {
             if ($rootScope.userName !== null || $rootScope.userName !== '' || $rootScope.userName !== undefined) {
                 userInfo.userName = $rootScope.userName;
-                console.log(userInfo);
+                console.log($rootScope.userName);
                 usersService
                     .addInfo(userInfo)
                     .then(function (data) {
