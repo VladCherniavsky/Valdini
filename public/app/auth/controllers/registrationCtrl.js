@@ -5,11 +5,11 @@ angular
     .controller('RegistrationCtrl', [
         'registrationService',
         '$rootScope', '$state',
-        'commonService',
+        'CommonService',
         'usersService',
         RegistrationCtrl]);
 
-    function RegistrationCtrl (registrationService, $rootScope, $state, commonService, usersService) {
+    function RegistrationCtrl (registrationService, $rootScope, $state, CommonService, usersService) {
         console.log('registrationCtrl is called');
 
         var self = this;
@@ -31,7 +31,7 @@ angular
                 });
         };
         self.clearCredential = function (user) {
-            commonService.clearObj(user);
+            CommonService.clearObj(user);
         };
 
         self.addInfoToUser = function (userInfo) {

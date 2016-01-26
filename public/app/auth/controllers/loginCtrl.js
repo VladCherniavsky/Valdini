@@ -1,11 +1,10 @@
-
 (function () {
     'use strict';
 angular
     .module('myApp')
-    .controller('loginCtrl', ['loginService', '$window', '$state','$rootScope', 'commonService', loginCtrlFn]);
+    .controller('loginCtrl', ['loginService', '$window', '$state','$rootScope', 'CommonService', loginCtrlFn]);
 
-    function loginCtrlFn(loginService, $window, $state,$rootScope, commonService) {
+    function loginCtrlFn(loginService, $window, $state,$rootScope, CommonService) {
         var self = this;
         this.loginUser = function (user) {
             var credentials = {
@@ -26,7 +25,7 @@ angular
                 });
         };
         this.checkToken = function () {
-            commonService
+            CommonService
                 .checkAuth()
                 .then(function (res) {
                     console.log(res);
@@ -35,7 +34,7 @@ angular
                 });
         };
         this.clearCredential=function(user){
-        	commonService.clearObj(user);
+        	CommonService.clearObj(user);
         };
     }
 }) ();

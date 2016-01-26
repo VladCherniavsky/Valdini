@@ -91,11 +91,11 @@ exports.addInfo = function (req, res, next){
 
 };
 exports.getFandoms = function (req, res, next) {
+    console.log(req.query);
 
     User.find({}, null, {
-            skip: req.query.skip,
-            limit: req.query.perPage
-        })
+        skip: Number(req.query.skip),
+        limit: Number(req.query.perPage)})
         .then(function (users) {
             console.log(users);
             if(users){

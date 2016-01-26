@@ -1,4 +1,3 @@
-
 (function () {
     'use strict';
     angular
@@ -12,7 +11,7 @@
         self.loading = false;
         self.pagination = {
             page: 1,
-            perPage: 12,
+            perPage: 7,
             skip:0
         }
 

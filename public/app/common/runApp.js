@@ -1,9 +1,9 @@
 angular
     .module('myApp')
-            .run(['$rootScope', 'commonService', '$state', run]);
+            .run(['$rootScope', 'CommonService', '$state', run]);
 
-function run ($rootScope, commonService, $state) {
-    commonService
+function run ($rootScope, CommonService, $state) {
+    CommonService
         .checkAuth()
             .then(successHandle, errorHandle);
 

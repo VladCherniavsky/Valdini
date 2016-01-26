@@ -2,10 +2,10 @@
     'use strict';
 angular
     .module('myApp')
-    .controller('authCtrl', ['commonService','$state','$rootScope', authFn]);
+    .controller('authCtrl', ['CommonService','$state','$rootScope', authFn]);
 
-    function authFn(commonService,$state,$rootScope) {
-        commonService.checkAuth().then(successHandle, errorHandle);
+    function authFn(CommonService,$state,$rootScope) {
+        CommonService.checkAuth().then(successHandle, errorHandle);
 
         this.tabs = {
             loginTab: true,

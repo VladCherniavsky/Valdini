@@ -1,9 +1,8 @@
-
 (function () {
     angular
         .module('myApp')
-        .service('commonService', ['$http','$window','$q', commonService]);
-    function commonService($http, $window, $q) {
+        .service('CommonService', ['$http','$window','$q', CommonService]);
+    function CommonService($http, $window, $q) {
         var self = this;
         var deferreddd = $q.defer();
         self.checkAuth = function () {
