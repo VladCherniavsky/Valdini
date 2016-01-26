@@ -2,46 +2,58 @@
     'use strict';
 angular
     .module('myApp')
-    .controller('registrationCtrl', ['registrationService', '$rootScope', '$state', 'commonService', 'usersService', registrationFn]);
+    .controller('RegistrationCtrl', [
+        'registrationService',
+        '$rootScope', '$state',
+        'commonService',
+        'usersService',
+        RegistrationCtrl]);
 
-    function registrationFn(registrationService, $rootScope, $state, commonService, usersService) {
+    function RegistrationCtrl (registrationService, $rootScope, $state, commonService, usersService) {
         console.log('registrationCtrl is called');
 
         var self = this;
-        self.numberOfFandoms = 10;
-        this.registerUser = function (user) {
-            console.log(user);
+
+        self.registerUser = function (user) {
             var credentials = {
                 email: user.email,
                 password: user.password
             };
             registrationService
                 .registerUser(credentials)
-                    .then(function (res) {
-                         console.log(res);
-                    self.clearCredential(user);
-                    $rootScope.userName = res.user.username;
-                    $state.go('join.details');
+                    .then(function (data) {
+                    if (data.success) {
+                        self.clearCredential(user);
+                        $rootScope.userName = data.user.username;
+                        $state.go('join.details');
+                    }
+
                 });
         };
-        this.clearCredential = function (user) {
+        self.clearCredential = function (user) {
             commonService.clearObj(user);
         };
 
-        this.addInfoToUser = function (userInfo) {
+        self.addInfoToUser = function (userInfo) {
             if ($rootScope.userName !== null || $rootScope.userName !== '' || $rootScope.userName !== undefined) {
                 userInfo.userName = $rootScope.userName;
                 console.log($rootScope.userName);
                 usersService
                     .addInfo(userInfo)
                     .then(function (data) {
-                        console.log(data);
                         $state.go('join.fandoms');
+                        console.log(self.items);
+
                     });
+
             }
         };
-        this.goToFandoms = function () {
 
-        };
+
+
+
+
+
+
     }
 }());

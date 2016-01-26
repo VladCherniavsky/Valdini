@@ -6,9 +6,7 @@ angular
     .controller('loginCtrl', ['loginService', '$window', '$state','$rootScope', 'commonService', loginCtrlFn]);
 
     function loginCtrlFn(loginService, $window, $state,$rootScope, commonService) {
-        console.log('loginCtrl is called');
         var self = this;
-      
         this.loginUser = function (user) {
             var credentials = {
                 email: user.email,
@@ -19,7 +17,6 @@ angular
                     .then(function (res) {
                     if (res.success) {
                         $window.localStorage.token = res.token;
-                        console.log(res);
                         self.clearCredential(user);
                         $rootScope.loggedIn = true;
                         $state.go('home');

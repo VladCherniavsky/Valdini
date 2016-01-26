@@ -12,7 +12,6 @@
                 url: 'api/users'
             })
                 .then(function (res) {
-                    console.log(res.data);
                     return res.data;
                 }, function (err) {
                     throw err;

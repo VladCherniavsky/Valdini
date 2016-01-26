@@ -9,9 +9,16 @@ angular
 		$stateProvider
 			.state('users', {
 				url:'/users',
-				templateUrl:'views/allUsers.html',
 				controller:'usersCtrl',
-				controllerAs:'users'
+				controllerAs:'users',
+				views: {
+					nav: {
+						templateUrl: 'views/navbar.html'
+					},
+					content: {
+						templateUrl: 'views/allUsers.html'
+					}
+				}
 
 			});	
 			

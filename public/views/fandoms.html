@@ -1,14 +1,12 @@
 <div class="fandomsForm">
-   <h1 class="fandomsForm__title">Choose top {{registration.numberOfFandoms}} fandoms</h1>
-    <div class="fandomsForm__content">
-        dsfsdfsdfdsfsdfadsfasdfa
-        dsfasdfasdfads
-        fasd
-        fasdfadsfadsfadsfadsf
-        adsfasdfasdfadsfadsfadsfasdfasdfadsfa asdf asf asdfasdfasdfadsfa
-        sdfasdfasdfasdfasdfasdfadsfasd
-        fasdfasdfasdfasdfadsf
-        asdfasdfasdf
+   <h1 class="fandomsForm__title">Choose top {{Fandoms.numberOfFandoms}} fandoms</h1>
+    <div class="fandomsForm__content"  when-scrolled="Fandoms.more()" >
+
+            <div  class="item" ng-repeat="item in Fandoms.items">
+                <div href="#"><a href="#">{{item.number}}</a></div>
+
+            </div>
+
     </div>
    <input type="submit" class="fandomsForm__btn btn btn-default" value="next..."/>
 </div>

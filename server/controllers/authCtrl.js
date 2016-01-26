@@ -6,8 +6,9 @@ exports.signup = function (req, res, next) {
 
     console.log(req.body.email);
     User.findOne({username: req.body.email})
-        .then(function (err, user) {
+        .then(function (user) {
             if (user) {
+                console.log('This email already taken. Please choose another one');
                 console.log(user);
                 res.json({success: false, message: 'This email already taken. Please choose another one'});
             } else {
@@ -69,7 +70,7 @@ exports.getAllUsers = function (req, res, next) {
             next(err);
         })
         .catch(next);
-}
+};
 exports.addInfo = function (req, res, next){
     console.log('req.body');
     console.log(req.body);
@@ -88,6 +89,19 @@ exports.addInfo = function (req, res, next){
             }
         });
 
+};
+exports.getFandoms = function (req, res, next) {
+
+    User.find({}, null, {
+            skip: req.query.skip,
+            limit: req.query.perPage
+        })
+        .then(function (users) {
+            console.log(users);
+            if(users){
+                res.json({success: true, message: 'ok',  users:users});
+            }
+        });
 };
 
 

@@ -11,7 +11,6 @@ angular
         usersService
             .getAllUsers()
             .then(function (allUsers) {
-                console.log(allUsers);
                 self.allUsers = allUsers;
             });
     }

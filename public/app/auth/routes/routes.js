@@ -33,12 +33,12 @@
             .state('join.signup',
             {
                 url: '/signup',
-                controller: 'registrationCtrl',
+                controller: 'RegistrationCtrl',
                 controllerAs: 'registration',
                 views: {
                     main: {
                         templateUrl: 'views/registration.html',
-                        controller: 'registrationCtrl',
+                        controller: 'RegistrationCtrl',
                         controllerAs: 'registration'
                     },
                     navTabs: {
@@ -53,23 +53,12 @@
                 views: {
                     main: {
                         templateUrl: 'views/info.html',
-                        controller: 'registrationCtrl',
-                        controllerAs: 'registration'
-                    }
-                }
-            })
-            .state('join.fandoms',
-            {
-                url: '/fandoms',
-                needName: true,
-                views: {
-                    main: {
-                        templateUrl: 'views/fandoms.html',
-                        controller: 'registrationCtrl',
+                        controller: 'RegistrationCtrl',
                         controllerAs: 'registration'
                     }
                 }
             });
 
+
     }
-})();
+}());
