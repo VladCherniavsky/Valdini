@@ -1,8 +1,8 @@
 <div class="fandomsForm">
    <h1 class="fandomsForm__title">Choose top {{Fandoms.numberOfFandoms}} fandoms</h1>
-    <div class="fandomsForm__content"  when-scrolled="Fandoms.more()" >
+    <div class="fandomsForm__content"  ng-class="{'end': Fandoms.showNotification}" when-scrolled="Fandoms.more()" >
 
-            <div  class="item" ng-repeat="item in Fandoms.items">
+            <div href="#" class="item"  ng-repeat="item in Fandoms.items">
                 <div href="#"><a href="#">{{item.number}}</a></div>
 
             </div>

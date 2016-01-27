@@ -163,6 +163,9 @@ a:focus, a:hover {
 	border-color: #31b0d5;
 	border-radius: 3px;
 }
+.end {
+	border-bottom: solid red 3px;
+}
 /*================scrollbar.html================
 ==================================== */
 ::-webkit-scrollbar {

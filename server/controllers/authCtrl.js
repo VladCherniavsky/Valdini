@@ -92,16 +92,24 @@ exports.addInfo = function (req, res, next){
 };
 exports.getFandoms = function (req, res, next) {
     console.log(req.query);
+    User.count({}).then(function (ammount) {
+        console.log(ammount);
+        if(req.query.skip < ammount) {
+            User.find({}, null, {
+                skip: Number(req.query.skip),
+                limit: Number(req.query.perPage)})
+                .then(function (users) {
+                    console.log(users);
+                    if(users){
+                        res.json({success: true, message: 'ok',  users:users});
+                    }
+                });
+        } else {
+            res.json({success: false, message: 'There are no more records in db'});
+        }
+    });
 
-    User.find({}, null, {
-        skip: Number(req.query.skip),
-        limit: Number(req.query.perPage)})
-        .then(function (users) {
-            console.log(users);
-            if(users){
-                res.json({success: true, message: 'ok',  users:users});
-            }
-        });
+
 };
 
 
