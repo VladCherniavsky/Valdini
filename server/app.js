@@ -20,7 +20,8 @@ var checkToken = require('./lib/checkToken');
 var checkTokenRoute = require('./routes/checkToken');
 
 
-var userRouter = require('./routes/user');
+var authRouter = require('./routes/user');
+var fandomsRouter = require('./routes/fandomsRouter');
 
 var app=express();
 
@@ -32,9 +33,11 @@ app.use(favicon(__dirname + '../../public/assets/favicon.ico'));
 app.use(express.static(__dirname+'../../public'));
 app.disable('etag');
 
-userRouter.use(checkTokenRoute);
+app.use('/api', fandomsRouter);
+authRouter.use(checkTokenRoute);
 //userRouter.use(checkToken);
-app.use('/api', userRouter);
+
+app.use('/api', authRouter);
 
 
 

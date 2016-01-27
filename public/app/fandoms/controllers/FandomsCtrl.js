@@ -6,6 +6,7 @@
 
     function FandomsCtrl($window, $state,$rootScope, FandomsService, $scope) {
         var self = this;
+        self.subscribedFandoms = [];
         self.numberOfFandoms = 10;
         self.items = [];
         self.loading = false;
@@ -13,7 +14,7 @@
         self.showNotification = false;
         self.pagination = {
             page: 1,
-            perPage: 7,
+            perPage: 4,
             skip:0
         }
 
@@ -25,11 +26,17 @@
                     .getFandoms(self.pagination)
                     .then(function (data) {
                         if (data.success) {
-                            angular.forEach(data.users, function (val, keys) {
+                            angular.forEach(data.fandoms, function (val, keys) {
                                 var newItem = val;
-                                newItem.number = self.items.length + 1;
+                                console.log(newItem);
+                               // newItem.number = self.items.length + 1;
                                 self.items.push(newItem);
                             });
+                            if(data.end){
+                                self.canLoadMore = false;
+                                self.showNotification = true;
+                            }
+
                         } else {
                             self.canLoadMore = false;
                         }
@@ -47,6 +54,23 @@
             }
         };
         self.more();
+
+        self.subscribeFandom = function (item) {
+            if (self.subscribedFandoms.indexOf(item._id) <=-1) {
+                self.subscribedFandoms.push(item._id);
+                item.subscribed = true;
+                self.numberOfFandoms -= 1;
+
+                console.log(self.subscribedFandoms);
+            } else {
+                self.subscribedFandoms.splice(self.subscribedFandoms.indexOf(item._id), 1);
+                item.subscribed = false;
+                self.numberOfFandoms += 1 ;
+                console.log(self.subscribedFandoms);
+            }
+
+        };
+
 
 
 

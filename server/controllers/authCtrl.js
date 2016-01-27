@@ -100,12 +100,16 @@ exports.getFandoms = function (req, res, next) {
                 limit: Number(req.query.perPage)})
                 .then(function (users) {
                     console.log(users);
-                    if(users){
-                        res.json({success: true, message: 'ok',  users:users});
+                    if(users) {
+                        if (users.length < Number(req.query.perPage)) {
+                            res.json({success: true, message: 'ok', users: users, end: true});
+                        } else {
+                        res.json({success: true, message: 'ok', users: users, end: false});
+                        }
                     }
                 });
         } else {
-            res.json({success: false, message: 'There are no more records in db'});
+            res.json({success: false, message: 'There are no more records in db',end: false});
         }
     });
 
