@@ -190,10 +190,10 @@ a:focus, a:hover {
 }
 /*================scrollbar.html================
 ==================================== */
-::-webkit-scrollbar {
+/*::-webkit-scrollbar {
 	background-color: transparent;
 }
 ::-webkit-scrollbar-thumb{
 	background-color: #2086bf;
 	border-radius: 5px;
-}
+}*/

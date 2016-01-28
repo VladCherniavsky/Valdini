@@ -1,11 +1,11 @@
 (function(){
     angular
         .module('myApp', ['ui.router'])
-        .controller('MainController', MainController);
+        .controller('mainCtrl', mainCtrl);
 
-    MainController.$inject = ['$rootScope', '$window', '$state'];
+    mainCtrl.$inject = ['$rootScope', '$window', '$state'];
 
-    function MainController($rootScope, $window, $state) {
+    function mainCtrl($rootScope, $window, $state) {
         $rootScope.logout = function () {
             console.log('log out called');
             $window.localStorage.clear();

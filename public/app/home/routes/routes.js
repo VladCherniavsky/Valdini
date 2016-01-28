@@ -15,7 +15,7 @@
                     },
                     content: {
                         templateUrl: 'views/home.html',
-                        controller: 'homeCtrl',
+                        controller: 'HomeController',
                         controllerAs: 'home'
                     }
                 }

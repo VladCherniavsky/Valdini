@@ -20,11 +20,11 @@
             .state('join.login',
             {
                 url: '/login',
-                controller: 'LoginController',
-                controllerAs: 'login',
                 views: {
                     main: {
-                        templateUrl: 'views/login.html'
+                        templateUrl: 'views/login.html',
+                        controller: 'LoginController',
+                        controllerAs: 'login'
                     },
                     navTabs: {
                         templateUrl: 'views/navTabs.html'
@@ -40,7 +40,7 @@
                     main: {
                         templateUrl: 'views/registration.html',
                         controller: 'RegistrationController',
-                        controllerAs: 'registration',
+                        controllerAs: 'registration'
                     },
                     navTabs: {
                         templateUrl: 'views/navTabs.html'
