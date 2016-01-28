@@ -1,31 +1,34 @@
 (function() {
     angular
         .module('myApp')
-            .config(['$stateProvider', '$urlRouterProvider', config]);
+        .config(config);
 
-    function config($stateProvider, $urlRouterProvider) { $urlRouterProvider.otherwise('/');
+    config.$inject = ['$stateProvider', '$urlRouterProvider'];
+
+    function config($stateProvider, $urlRouterProvider,$rootScope) {
+        $urlRouterProvider.otherwise('/');
 
         $stateProvider
             .state('join',
             {
                 url: '/join',
                 templateUrl: 'views/securityForm.html',
-                controller: 'authCtrl',
-                controllerAs: 'auth'
+                controller: 'TabsController',
+                controllerAs: 'tabs'
+
             })
             .state('join.login',
             {
                 url: '/login',
-                controller: 'loginCtrl',
+                controller: 'LoginController',
                 controllerAs: 'login',
                 views: {
                     main: {
-                        templateUrl: 'views/login.html',
-                        controller: 'loginCtrl',
-                        controllerAs: 'login'
+                        templateUrl: 'views/login.html'
                     },
                     navTabs: {
                         templateUrl: 'views/navTabs.html'
+
                     }
 
                 }
@@ -33,16 +36,15 @@
             .state('join.signup',
             {
                 url: '/signup',
-                controller: 'RegistrationCtrl',
-                controllerAs: 'registration',
                 views: {
                     main: {
                         templateUrl: 'views/registration.html',
-                        controller: 'RegistrationCtrl',
-                        controllerAs: 'registration'
+                        controller: 'RegistrationController',
+                        controllerAs: 'registration',
                     },
                     navTabs: {
                         templateUrl: 'views/navTabs.html'
+
                     }
                 }
             })
@@ -53,12 +55,10 @@
                 views: {
                     main: {
                         templateUrl: 'views/info.html',
-                        controller: 'RegistrationCtrl',
+                        controller: 'RegistrationController',
                         controllerAs: 'registration'
                     }
                 }
             });
-
-
     }
 }());

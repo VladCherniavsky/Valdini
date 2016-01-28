@@ -40,16 +40,14 @@
                 }
                 return deferred.promise;
             }, function(err){
-                throw err;
-            }).catch(function (err) {
-                throw err;
+                console.log(err);
             });
 
     };
 
     this.getToken = function(){
-        var token =$window.localStorage.token;
-        var deferred = $q.defer();                
+        var token = $window.localStorage.token;
+        var deferred = $q.defer();
         if(token){
            deferred.resolve(token);
        }
@@ -59,9 +57,9 @@
        return deferred.promise;
    };
    this.clearObj=function(obj){
-        for(var prop in obj){
+        for (var prop in obj){
             obj[prop]='';
         }
    };
 }
-})();
+}());

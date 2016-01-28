@@ -2,9 +2,11 @@
     'use strict';
     angular
         .module('myApp')
-        .controller('homeCtrl', ['CommonService', '$state', '$rootScope',homeFn]);
+        .controller('HomeController', HomeController);
 
-    function homeFn(CommonService, $state, $rootScope) {
+    HomeController.$inject = ['CommonService', '$state', '$rootScope'];
+
+    function HomeController(CommonService, $state, $rootScope) {
         console.log('HomeCtrl get called');
     }
 }());

@@ -1,7 +1,9 @@
 (function() {
     angular
         .module('myApp')
-        .config(['$stateProvider', '$urlRouterProvider', config]);
+        .config(config);
+
+    config.$inject = ['$stateProvider', '$urlRouterProvider'];
 
     function config($stateProvider, $urlRouterProvider) { $urlRouterProvider.otherwise('/');
 
@@ -13,7 +15,7 @@
                 views: {
                     main: {
                         templateUrl: 'views/fandoms.html',
-                        controller: 'FandomsCtrl',
+                        controller: 'FandomsController',
                         controllerAs: 'Fandoms'
                     }
                 }

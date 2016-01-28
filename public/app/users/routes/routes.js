@@ -1,10 +1,11 @@
 (function(){
 angular
 	.module('myApp')
-	.config(['$stateProvider','$urlRouterProvider', config]);
+	.config(config);
+
+	config.$inject = ['$stateProvider', '$urlRouterProvider'];
 
 	function config($stateProvider,$urlRouterProvider){
-
 
 		$stateProvider
 			.state('users', {
@@ -15,7 +16,7 @@ angular
 					},
 					content: {
 						templateUrl: 'views/allUsers.html',
-						controller:'usersCtrl',
+						controller:'UsersController',
 						controllerAs:'users'
 					}
 				}
@@ -23,4 +24,4 @@ angular
 			});	
 			
 	}
-}())
+}());

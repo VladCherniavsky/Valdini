@@ -1,40 +1,34 @@
 (function () {
     'use strict';
-angular
-    .module('myApp')
-    .controller('loginCtrl', ['loginService', '$window', '$state','$rootScope', 'CommonService', loginCtrlFn]);
+    angular
+        .module('myApp')
+        .controller('LoginController', LoginController);
 
-    function loginCtrlFn(loginService, $window, $state,$rootScope, CommonService) {
+    LoginController.$inject = ['loginService', '$window', '$state','$rootScope', 'CommonService'];
+
+    function LoginController(loginService, $window, $state,$rootScope, CommonService) {
+        console.log('login called');
         var self = this;
-        this.loginUser = function (user) {
+        self.loginUser = loginUser;
+
+        function loginUser (user) {
             var credentials = {
                 email: user.email,
                 password: user.password
             };
             loginService
                 .loginUser(credentials)
-                    .then(function (res) {
+                .then(function (res) {
                     if (res.success) {
                         $window.localStorage.token = res.token;
-                        self.clearCredential(user);
+                        CommonService.clearObj(user);
                         $rootScope.loggedIn = true;
                         $state.go('home');
                     } else {
                         $state.go('join.login');
                     }
                 });
-        };
-        this.checkToken = function () {
-            CommonService
-                .checkAuth()
-                .then(function (res) {
-                    console.log(res);
-                }, function (err) {
-                    console.log(err);
-                });
-        };
-        this.clearCredential=function(user){
-        	CommonService.clearObj(user);
-        };
+        }
+
     }
-}) ();
+}()) ;

@@ -1,15 +1,12 @@
 (function () {
     'use strict';
-angular
-    .module('myApp')
-    .controller('RegistrationCtrl', [
-        'registrationService',
-        '$rootScope', '$state',
-        'CommonService',
-        'usersService',
-        RegistrationCtrl]);
+    angular
+        .module('myApp')
+        .controller('RegistrationController', RegistrationController);
 
-    function RegistrationCtrl (registrationService, $rootScope, $state, CommonService, usersService) {
+    RegistrationController.$inject = ['registrationService','$rootScope', '$state', 'CommonService','usersService','$log'];
+
+    function RegistrationController (registrationService, $rootScope, $state, CommonService, usersService, $log) {
         console.log('registrationCtrl is called');
 
         var self = this;
@@ -26,6 +23,9 @@ angular
                         self.clearCredential(user);
                         $rootScope.userName = data.user.username;
                         $state.go('join.details');
+                    } else {
+                        self.clearCredential(user);
+                        console.log(data);
                     }
 
                 });
@@ -35,25 +35,26 @@ angular
         };
 
         self.addInfoToUser = function (userInfo) {
-            if ($rootScope.userName !== null || $rootScope.userName !== '' || $rootScope.userName !== undefined) {
+            if (!$rootScope.userName) {
+                $state.go('join.login');
+            } else {
                 userInfo.userName = $rootScope.userName;
                 console.log($rootScope.userName);
                 usersService
                     .addInfo(userInfo)
                     .then(function (data) {
-                        $state.go('join.fandoms');
-                        console.log(self.items);
+                        if(data.success){
+                            $log.info(data)
+                            $state.go('join.fandoms');
+                        } else {
+                            $log.info(data)
+                            $state.go('join.login');
+                        }
+
 
                     });
-
             }
+
         };
-
-
-
-
-
-
-
     }
 }());

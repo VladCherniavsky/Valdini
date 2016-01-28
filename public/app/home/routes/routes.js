@@ -1,12 +1,11 @@
 (function(){
     angular
         .module('myApp')
-        .config(['$stateProvider','$urlRouterProvider', config]);
+        .config(config);
+
+    config.$inject = ['$stateProvider', '$urlRouterProvider'];
 
     function config($stateProvider,$urlRouterProvider) {
-
-
-
         $stateProvider
             .state('home', {
                 url: '/home',

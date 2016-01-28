@@ -1,9 +1,12 @@
 (function () {
     'use strict';
-    angular.module('myApp')
-        .service('usersService', ['$http', usersFn]);
+    angular
+        .module('myApp')
+        .service('usersService', usersService);
 
-    function usersFn($http) {
+    usersService.$inject = ['$http'];
+
+    function usersService($http) {
         var self = this;
         console.log('users service ok');
         self.getAllUsers = function () {

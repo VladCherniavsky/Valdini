@@ -1,29 +1,34 @@
-angular
-    .module('myApp')
-            .run(['$rootScope', 'CommonService', '$state', run]);
+(function(){
+    angular
+        .module('myApp')
+        .run(runBlock);
 
-function run ($rootScope, CommonService, $state) {
-    CommonService
-        .checkAuth()
+    runBlock.$inject = ['$rootScope', 'CommonService', '$state'];
+
+    function runBlock ($rootScope, CommonService, $state) {
+        CommonService
+            .checkAuth()
             .then(successHandle, errorHandle);
 
-    $rootScope.$on('$stateChangeStart', function (e, toState) {
-        if ((toState.needName === true) && ($rootScope.userName === undefined || $rootScope.userName === '')) {
-            e.preventDefault();
-            $state.go('join.login');
-        }
-    });
+        $rootScope.$on('$stateChangeStart', stateChangeStart);
 
-    function successHandle (data) {
-        if (data.success) {
-            $state.go('home');
-            $rootScope.loggedIn = true;
-        } else {
-            $rootScope.loggedIn = false;
+        function stateChangeStart (e, toState) {
+            if ((toState.needName) && (!$rootScope.userName )) {
+                e.preventDefault();
+                $state.go('join.login');
+            }
+        }
+        function successHandle (data) {
+            if (data.success) {
+                $state.go('home');
+                $rootScope.loggedIn = true;
+            } else {
+                $rootScope.loggedIn = false;
+                $state.go('join.login');
+            }
+        }
+        function errorHandle () {
             $state.go('join.login');
         }
     }
-    function errorHandle (data) {
-        $state.go('join.login');
-    }
-}
+}());

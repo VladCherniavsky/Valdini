@@ -1,13 +1,17 @@
-angular
-    .module('myApp', ['ui.router'])
-    .controller('mainCtrl', ['$rootScope', '$window', '$state', mainCtrl]);
+(function(){
+    angular
+        .module('myApp', ['ui.router'])
+        .controller('MainController', MainController);
 
-function mainCtrl($rootScope, $window, $state) {
-    $rootScope.logout = function () {
-        console.log('log out called');
-        $window.localStorage.clear();
-        $rootScope.loggedIn = false;
-        $state.go('join.login');
+    MainController.$inject = ['$rootScope', '$window', '$state'];
 
-    };
-}
+    function MainController($rootScope, $window, $state) {
+        $rootScope.logout = function () {
+            console.log('log out called');
+            $window.localStorage.clear();
+            $rootScope.loggedIn = false;
+            $state.go('join.login');
+
+        };
+    }
+}());
