@@ -29,7 +29,7 @@ var user = new Schema({
     },
     updated: {
         type: Date,
-        defauld: Date.now()
+        default: Date.now
     }
 });
 var userModel = mongoose.model('User', user);

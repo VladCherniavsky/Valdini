@@ -16,20 +16,17 @@ exports.signup = function (req, res, next) {
 */
                 var userModel = new User({
                     username: req.body.email,
-                    password: req.body.password,
-                    admin: req.body.access
+                    password: req.body.password
+
                 });
-                userModel.save()
+                userModel.trySave()
                     .then(function (user) {
                         log.info('User saved successfully');
                         console.log(user);
-                        res.json({success: true,
-                            message: 'User is registered',
-                            user: user
-                        });
+                        res.json({success: true, message: 'User is registered', user: user});
                     }, function (err) {
-                        console.log(err);
-                        });
+                        console.log(err.message);
+                    });
 
 
          //   }
