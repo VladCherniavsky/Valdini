@@ -20,6 +20,7 @@
                 .registerUser(credentials)
                     .then(function (data) {
                     if (data.success) {
+                        console.log(data);
                         self.clearCredential(user);
                         $rootScope.userName = data.user.username;
                         $state.go('join.details');

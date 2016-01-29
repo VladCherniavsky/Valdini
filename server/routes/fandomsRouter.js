@@ -3,5 +3,7 @@ var express = require('express'),
     fandomsCtrl = require('../controllers/fandomsCtrl');
 
 
+
 router.get('/fandoms', fandomsCtrl.getFandoms);
+router.post('/fandoms',  fandomsCtrl.refreshFandomsArrayForUser);
 module.exports = router;

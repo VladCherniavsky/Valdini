@@ -1,12 +1,19 @@
 (function () {
     'use strict';
     angular.module('myApp')
-        .service('FandomsService', ['$http', FandomsService]);
+        .service('FandomsService', FandomsService);
+
+    FandomsService.$inject = ['$http'];
 
     function FandomsService($http) {
-        var self = this;
         console.log('fandoms  service ok');
-        self.getFandoms = function (options) {
+
+        var self = this;
+        self.getFandoms = getFandoms;
+        self.addFandomsToUser = addFandomsToUser;
+
+
+        function getFandoms  (options) {
             console.log(options);
             return $http({
                 method: 'GET',
@@ -17,8 +24,28 @@
                     console.log(res.data);
                     return res.data;
                 }, function (err) {
-                    throw err;
+                    return err;
                 });
-        };
+        }
+
+        function addFandomsToUser (username, fandomsArray) {
+            console.log(username);
+            console.log(fandomsArray);
+            return $http({
+                method: 'POST',
+                url: 'api/fandoms',
+                data:{
+                    username: username,
+                    fandoms: fandomsArray
+                }
+            })
+                .then(function (res) {
+                    console.log(res.data);
+                    return res.data;
+                }, function (err) {
+                    return err;
+                });
+        }
     }
 }());
+

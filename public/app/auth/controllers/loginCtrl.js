@@ -7,11 +7,13 @@
     LoginController.$inject = ['loginService', '$window', '$state','$rootScope', 'CommonService'];
 
     function LoginController(loginService, $window, $state,$rootScope, CommonService) {
+        $rootScope.tabs.showLoginTab();
         console.log('login called');
         var self = this;
         self.loginUser = loginUser;
 
         function loginUser (user) {
+            console.log(user);
             var credentials = {
                 email: user.email,
                 password: user.password

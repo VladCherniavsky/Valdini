@@ -1,13 +1,13 @@
 <ul class="nav nav-tabs">
-		 <li
-			ng-class="{'active':tabs.tabs.loginTab}"
-			ng-click="tabs.tabs.loginTab = true; tabs.tabs.registrationTab=false">
+
+		 <li ng-class="{'active':tabs.tabs.loginTab}"
+			 ng-click="tabs.tabs.loginTab = true; tabs.tabs.registrationTab=false">
 			<a ui-sref="join.login">Login to service</a>
 		</li>
-		<li
-			ng-class="{'active':tabs.tabs.registrationTab}"
+
+		<li ng-class="{'active':tabs.tabs.registrationTab}"
 			ng-click="tabs.tabs.registrationTab=true; tabs.tabs.loginTab = false">
 			<a ui-sref="join.signup">Sign Up</a>
 		</li>
-	</ul>
-	<br>
+</ul>
+<br>

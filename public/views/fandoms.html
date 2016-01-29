@@ -1,16 +1,22 @@
 <div class="fandomsForm">
-   <h1 ng-hide="Fandoms.numberOfFandoms<=0" class="fandomsForm__title">Choose top {{Fandoms.numberOfFandoms}} fandoms</h1>
+   <h1 ng-hide="Fandoms.numberOfFandoms<=0" class="fandomsForm__title">Please, choose  {{Fandoms.numberOfFandoms}} fandoms</h1>
     <h1 ng-show="Fandoms.numberOfFandoms<=0" class="fandomsForm__title">It is done</h1>
-    <div  class="fandomsForm__content"  ng-class="{'end': Fandoms.showNotification}" when-scrolled="Fandoms.more()" >
+    <div  class="fandomsForm__content"
+          ng-class="{'end': Fandoms.showNotification}"
+          when-scrolled="Fandoms.more()" >
+
         <a href="#">
-            <div href="#" class="item" ng-click="Fandoms.subscribeFandom(item)" ng-repeat="item in Fandoms.items">
+            <div href="#"
+                 class="item"
+                 ng-click="Fandoms.subscribeFandom(item)"
+                 ng-repeat="item in Fandoms.items">
+
                 <div class="fandomsForm__content__title">
                     {{item.name}}
                 </div>
 
-                <div
-                        ng-show=" item.subscribed"
-                        ng-class="{'checked': item.subscribed}">
+                <div ng-show=" item.subscribed"
+                     ng-class="{'checked': item.subscribed}">
                     <i class="glyphicon glyphicon-ok"></i>
                 </div>
 
@@ -18,5 +24,9 @@
         </a>
 
     </div>
-   <input type="submit"ng-disabled="Fandoms.numberOfFandoms> 0" class="fandomsForm__btn btn btn-default" value="next..."/>
+   <input type="button"
+          class="fandomsForm__btn btn btn-default"
+          value="next..."
+          ng-disabled = "Fandoms.numberOfFandoms>0"
+          ng-click = "Fandoms.addFandomsToUser()"/>
 </div>

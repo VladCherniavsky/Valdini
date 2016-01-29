@@ -21,7 +21,8 @@
     "mongoose": "^4.3.2",
     "morgan": "^1.6.1",
     "passport": "^0.3.2",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "winston": "^2.1.1"
   },
   "devDependencies": {
     "jshint": "^2.8.0"

@@ -4,9 +4,9 @@
         .module('myApp')
         .controller('FandomsController', FandomsController);
 
-    FandomsController.$inject = ['$window', '$state','$rootScope', 'FandomsService','$scope'];
+    FandomsController.$inject = ['$log', '$state','$rootScope', 'FandomsService','$scope'];
 
-    function FandomsController($window, $state,$rootScope, FandomsService, $scope) {
+    function FandomsController($log, $state, $rootScope, FandomsService, $scope) {
         var self = this;
 
         self.subscribedFandoms = [];
@@ -22,6 +22,7 @@
         };
         self.more = more;
         self.subscribeFandom = subscribeFandom;
+        self.addFandomsToUser = addFandomsToUser;
         self.more();
 
         function more  () {
@@ -67,6 +68,24 @@
                 self.numberOfFandoms += 1 ;
 
             }
+        }
+
+        function addFandomsToUser () {
+            $log.info($rootScope.userName);
+            $log.info(self.items);
+            if ($rootScope.userName) {
+                FandomsService
+                    .addFandomsToUser($rootScope.userName, self.subscribedFandoms)
+                    .then(onSuccess, onError);
+            }
+        }
+
+        function onSuccess (data) {
+            $state.go('join.login');
+
+        }
+        function onError (err) {
+            console.log(err);
         }
     }
 }());

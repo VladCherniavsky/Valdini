@@ -1,5 +1,6 @@
 var Fandom = require('../models/fandomsModel'),
-    jwt = require('jsonwebtoken');
+    jwt = require('jsonwebtoken'),
+    User = require('../models/userModel');
 
 
 exports.getFandoms = function (req, res, next) {
@@ -25,4 +26,25 @@ exports.getFandoms = function (req, res, next) {
         }
     });
 };
+
+exports.refreshFandomsArrayForUser = function (req, res, next) {
+    User.update(
+        {username: req.body.username},
+        {$set: {
+            'subscribedFandoms': req.body.fandoms
+        }}).then(function (data) {
+            User.find({username: req.body.username})
+                .then(function (user) {
+                        return res.json({
+                            success: true,
+                            message: 'Fandoms are added to user',
+                            firstName: user.firstName});
+
+                });
+
+        }, function (err) {
+            console.log(err);
+            return  res.json({success: false, message: 'User info not saved', username:req.body.userName});
+        });
+}
 
