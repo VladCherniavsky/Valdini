@@ -6,7 +6,7 @@ var express = require('express'),
 
 router.get('/users',authCtrl.getAllUsers);
 router.post('/login', authCtrl.login);
-router.post('/register', authCtrl.signup)
+router.post('/register', authCtrl.signup);
 router.post('/addInfo', authCtrl.addInfo);
 
 

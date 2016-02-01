@@ -23,8 +23,8 @@
                 .then(function (res) {
                     console.log(res.data);
                     return res.data;
-                }, function (err) {
-                    return err;
+                }).catch(function(err) {
+                    console.log(err);
                 });
         }
 
@@ -42,8 +42,8 @@
                 .then(function (res) {
                     console.log(res.data);
                     return res.data;
-                }, function (err) {
-                    return err;
+                }).catch(function (err) {
+                    console.log(err);
                 });
         }
     }

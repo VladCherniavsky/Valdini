@@ -11,11 +11,10 @@
                     if (token) {
                         self.checkToken(token)
                             .then(function (res) {
-                                if (res.success) {
-                                    deferreddd.resolve(res);
+                                if (res.success) {deferreddd.resolve(res);
                                 }
                             }, function (err) {
-                                deferreddd.reject(err);
+                                return deferreddd.reject(err);
                             });
                     }
                 }, function (err) {
@@ -39,7 +38,7 @@
                     deferred.reject(res.data);
                 }
                 return deferred.promise;
-            }, function(err){
+            }).catch(function (err) {
                 console.log(err);
             });
 

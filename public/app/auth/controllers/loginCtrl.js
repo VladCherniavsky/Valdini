@@ -18,7 +18,7 @@
                 email: user.email,
                 password: user.password
             };
-            loginService
+           loginService
                 .loginUser(credentials)
                 .then(function (res) {
                     if (res.success) {
@@ -29,6 +29,9 @@
                     } else {
                         $state.go('join.login');
                     }
+                }).catch(function (err) {
+                    console.log(err);
+                    $state.go('join.login');
                 });
         }
 

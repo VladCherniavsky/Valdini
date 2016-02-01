@@ -19,14 +19,25 @@ exports.signup = function (req, res, next) {
                     password: req.body.password
 
                 });
-                userModel.trySave()
-                    .then(function (user) {
+                userModel.save(function(err,user){
+                    if (err){
+                        console.log('err');
+                        console.log(err);
+                        return next(err);
+                    } else {
+                        log.info('User saved successfully');
+                        console.log(user);
+                        res.json({success: true, message: 'User is registered', user: user});
+                    }
+
+                }).catch(next);
+                    /*.then(function (user) {
                         log.info('User saved successfully');
                         console.log(user);
                         res.json({success: true, message: 'User is registered', user: user});
                     }, function (err) {
-                        console.log(err.message);
-                    });
+                        console.log('err');
+                    });*/
 
 
          //   }
@@ -66,7 +77,7 @@ exports.getAllUsers = function (req, res, next) {
         .then(function (users) {
             console.log(users);
             res.json(users);
-        }, function (err) {
+        }).catch(function (err) {
             next(err);
         });
 

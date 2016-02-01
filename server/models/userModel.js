@@ -5,7 +5,8 @@ var Schema = mongoose.Schema;
 var user = new Schema({
     username: {
         type: String,
-        unique: true,
+        index:true,
+        unique: true ,
         required: true
     },
     password: {
@@ -33,6 +34,25 @@ var user = new Schema({
     }
 });
 var userModel = mongoose.model('User', user);
+
+user.pre('save', function(next, done) {
+    var self = this;
+    console.log('dddd');
+    console.log(self);
+
+    mongoose.models.User.findOne({username : self.username},function(err, user) {
+        if(err) {
+            done(err);
+        } else if(user) {
+            console.warn('user', user);
+            done(new Error('ValidationError','username must be unique'));
+        } else {
+            done();
+        }
+    });
+
+});
+
 module.exports = userModel;
 
 
