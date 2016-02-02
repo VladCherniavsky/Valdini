@@ -5,6 +5,7 @@
 
     mainCtrl.$inject = ['$rootScope', '$window', '$state'];
 
+
     function mainCtrl($rootScope, $window, $state) {
         $rootScope.logout = function () {
             console.log('log out called');

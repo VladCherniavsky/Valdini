@@ -5,15 +5,16 @@
         .module('myApp')
         .controller('UsersController', UsersController);
 
-    UsersController.$inject = ['usersService'];
+    UsersController.$inject = ['usersService', '$log', '$state', 'CommonService'];
 
-    function UsersController(usersService) {
+    function UsersController(usersService, $log, $state, CommonService) {
         var self = this;
         self.name = 'Vlad';
         usersService
             .getAllUsers()
-            .then(function (allUsers) {
-                self.allUsers = allUsers;
+            .then(function (data) {
+                CommonService.redirectToLogin(data);
+                $log.warn(data);
             });
     }
 }());

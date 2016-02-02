@@ -4,44 +4,21 @@ var User = require('../models/userModel'),
 
 exports.signup = function (req, res, next) {
     'use strict';
-
-    log.info(req.body.email);
-    /*User.findOne({username: req.body.email})
-        .then(function (user) {
-            if (user) {
-                log.info('This email already taken. Please choose another one');
-                log.info(user);
-                res.json({success: false, message: 'This email already taken. Please choose another one'});
-            } else {
-*/
-                var userModel = new User({
-                    username: req.body.email,
-                    password: req.body.password
-
-                });
-                userModel.save(function(err,user){
-                    if (err){
-                        console.log('err');
-                        console.log(err);
-                        return next(err);
-                    } else {
-                        log.info('User saved successfully');
-                        console.log(user);
-                        res.json({success: true, message: 'User is registered', user: user});
-                    }
-
-                }).catch(next);
-                    /*.then(function (user) {
-                        log.info('User saved successfully');
-                        console.log(user);
-                        res.json({success: true, message: 'User is registered', user: user});
-                    }, function (err) {
-                        console.log('err');
-                    });*/
-
-
-         //   }
-      //  }).catch(next);
+    var userModel = new User({
+        username: req.body.email,
+        password: req.body.password
+    });
+    userModel.save().then(function (user) {
+        if (user){
+            log.info('User saved successfully');
+            console.log(user);
+            res.json({success: true, message: 'User is registered', user: user});
+        }
+    }).catch(function(err){
+        console.log('errorrrrr');
+        console.log(err);
+        return next(err);
+    });
 };
 
 exports.login = function (req, res, next) {
@@ -61,13 +38,14 @@ exports.login = function (req, res, next) {
                 };
                 console.log(userInfo);
                 var token = jwt.sign(userInfo, 'vlados', {
-                    expiresIn: '100s'
+                    expiresIn: '10s'
                 });
+                res.cookie('token', token);
                 res.json({success: true, message: 'ok',  user: userInfo, token: token});
             }
         }
-    }, function (err) {
-        next (err);
+    }).catch(function (err) {
+        return next(err);
     });
 };
 
@@ -75,8 +53,8 @@ exports.getAllUsers = function (req, res, next) {
     'user strict';
     User.find({})
         .then(function (users) {
-            console.log(users);
-            res.json(users);
+
+            res.json({success: true, users: users});
         }).catch(function (err) {
             next(err);
         });

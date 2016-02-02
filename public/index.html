@@ -9,16 +9,15 @@
 	
 
 </head>
-<body class="bg-color" ng-app="myApp" >	
+<body  ng-app="myApp" >
+
 
 	<div ui-view name="nav"></div>
-	<div class="container">
-		<div ui-view name="content"></div>
-	</div>
 
-	<div ui-view>
+	<div ui-view name="content"></div>
 
-	</div>
+	<div ui-view></div>
+
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>

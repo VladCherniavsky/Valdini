@@ -1,16 +1,18 @@
-var mongoose = require('mongoose');
+var mongoose = require('mongoose'),
+    uniqueValidator = require('mongoose-unique-validator');
 mongoose.Promise = require('bluebird');
 
 var Schema = mongoose.Schema;
+
 var user = new Schema({
     username: {
         type: String,
-        index:true,
-        unique: true ,
+        unique: 'this username already exists',
         required: true
     },
     password: {
-        type: String
+        type: String,
+        required: true
     },
     admin: {
         type: Boolean,
@@ -33,26 +35,9 @@ var user = new Schema({
         default: Date.now
     }
 });
+
+user.plugin(uniqueValidator);
 var userModel = mongoose.model('User', user);
-
-user.pre('save', function(next, done) {
-    var self = this;
-    console.log('dddd');
-    console.log(self);
-
-    mongoose.models.User.findOne({username : self.username},function(err, user) {
-        if(err) {
-            done(err);
-        } else if(user) {
-            console.warn('user', user);
-            done(new Error('ValidationError','username must be unique'));
-        } else {
-            done();
-        }
-    });
-
-});
-
 module.exports = userModel;
 
 

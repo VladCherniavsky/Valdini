@@ -6,9 +6,11 @@
     runBlock.$inject = ['$rootScope', 'CommonService', '$state'];
 
     function runBlock ($rootScope, CommonService, $state) {
+        console.log('run');
         CommonService
             .checkAuth()
             .then(successHandle, errorHandle);
+
 
         $rootScope.$on('$stateChangeStart', stateChangeStart);
 
@@ -19,6 +21,7 @@
             }
         }
         function successHandle (data) {
+            console.log(data);
             if (data.success) {
                 $state.go('home');
                 $rootScope.loggedIn = true;
@@ -28,6 +31,7 @@
             }
         }
         function errorHandle () {
+            console.log('run');
             $state.go('join.login');
         }
     }

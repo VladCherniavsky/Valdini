@@ -1,18 +1,36 @@
 (function () {
     angular
         .module('myApp')
-        .service('CommonService', ['$http','$window','$q', CommonService]);
-    function CommonService($http, $window, $q) {
+        .service('CommonService', CommonService);
+
+    CommonService.$inject = ['$http','$window','$q', '$state'];
+
+    function CommonService($http, $window, $q, $state) {
+
         var self = this;
-        var deferreddd = $q.defer();
-        self.checkAuth = function () {
+
+        self.checkAuth = checkAuth;
+        self.checkToken = checkToken;
+        self.clearObj = clearObj;
+        self.getToken = getToken;
+        self.redirectToLogin = redirectToLogin;
+
+
+
+        function checkAuth () {
+            var deferreddd = $q.defer();
             self.getToken()
                 .then(function (token) {
                     if (token) {
                         self.checkToken(token)
                             .then(function (res) {
-                                if (res.success) {deferreddd.resolve(res);
+                                console.log(res);
+                                if (res.success) {
+                                    deferreddd.resolve(res);
+                                } else {
+                                    deferreddd.resolve(res);
                                 }
+
                             }, function (err) {
                                 return deferreddd.reject(err);
                             });
@@ -21,44 +39,56 @@
                     deferreddd.reject(err);
                 });
             return deferreddd.promise;
-        };
-    this.checkToken=function(token){
-        return $http({
-           method:'POST',
-           url:'api/checkToken',
-           data:{
-            token:token
-           }
-        })
-            .then(function (res) {
-                var deferred = $q.defer();
-                if(res.data.success) {
-                    deferred.resolve(res.data);
-                } else {
-                    deferred.reject(res.data);
-                }
-                return deferred.promise;
-            }).catch(function (err) {
-                console.log(err);
-            });
-
-    };
-
-    this.getToken = function(){
-        var token = $window.localStorage.token;
-        var deferred = $q.defer();
-        if(token){
-           deferred.resolve(token);
-       }
-       else{
-           deferred.reject(false);
-       }
-       return deferred.promise;
-   };
-   this.clearObj=function(obj){
-        for (var prop in obj){
-            obj[prop]='';
         }
-   };
+
+
+        function checkToken (token){
+            return $http({
+                method:'POST',
+                url:'api/checkToken',
+                data:{
+                    token:token
+                }
+            })
+                .then(function (res) {
+                    var deferred = $q.defer();
+                    console.log(res);
+                    if(res.data.success) {
+                        deferred.resolve(res.data);
+                    } else {
+                        deferred.reject(res.data);
+                    }
+                    return deferred.promise;
+                }).catch(function (err) {
+                    console.log(err);
+                    return err;
+                });
+
+        }
+
+        function getToken () {
+            var token = $window.localStorage.token;
+            var deferred = $q.defer();
+            if(token){
+                deferred.resolve(token);
+            }
+            else{
+                deferred.reject(false);
+            }
+            return deferred.promise;
+        }
+
+        function clearObj (obj){
+            for (var prop in obj){
+                obj[prop]='';
+            }
+        }
+
+        function redirectToLogin (data) {
+            if(!data.success) {
+                $state.go('join.login');
+            }
+        }
+
 }
 }());
