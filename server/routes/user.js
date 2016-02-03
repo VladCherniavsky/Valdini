@@ -7,7 +7,7 @@ var express = require('express'),
 router.get('/users', checkToken, authCtrl.getAllUsers);
 router.post('/login', authCtrl.login);
 router.post('/register', authCtrl.signup);
-router.post('/addInfo',checkToken, authCtrl.addInfo);
+router.post('/addInfo', authCtrl.addInfo);
 
 
 module.exports = router;

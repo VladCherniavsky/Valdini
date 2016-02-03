@@ -1,4 +1,5 @@
-var jwt = require('jsonwebtoken');
+var jwt = require('jsonwebtoken'),
+    config = require('../config');
 
 exports.checkToken = function (req, res) {
     console.log('checktoken request');
@@ -6,7 +7,7 @@ exports.checkToken = function (req, res) {
     var token = req.body.token;
 
     if (token) {
-        jwt.verify(token, 'vlados', function (err, decoded) {
+        jwt.verify(token, config.get('key'), function (err, decoded) {
             if( err) {
                 console.log('err');
                 console.log(err);

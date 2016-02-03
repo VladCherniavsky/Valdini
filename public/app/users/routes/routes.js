@@ -12,7 +12,10 @@ angular
 				url:'/users',
 				views: {
 					nav: {
-						templateUrl: 'views/navbar.html'
+						templateUrl: 'views/navbar.html',
+                        controller: 'CommonController',
+                        controllerAs:'common'
+
 					},
 					content: {
 						templateUrl: 'views/allUsers.html',

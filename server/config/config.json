@@ -1,0 +1,8 @@
+{
+  "port": 3000,
+  "db": {
+    "connection": "mongodb://localhost/userlist",
+    "name": "db_name"
+  },
+  "key": "vlados"
+}

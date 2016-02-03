@@ -1,4 +1,4 @@
-<nav class="navbar navbar-inverse" role="navigation" ng-controller="mainCtrl">
+<nav class="navbar navbar-inverse" role="navigation">
     <div class="navbar-header">
         <a class="navbar-brand" ui-sref="home" >Valdini</a>
     </div>
@@ -7,6 +7,6 @@
     </ul>
     <ul class="nav navbar-nav right">
         <li  ng-hide="loggedIn"><a ui-sref="join.login">Log In</a></li>
-        <li  ng-show="loggedIn"><a href="#" ng-click="logout()">Log Out</a></li>
+        <li  ng-show="loggedIn"><a href="#" ng-click="common.logout()">Log Out</a></li>
     </ul>
 </nav>

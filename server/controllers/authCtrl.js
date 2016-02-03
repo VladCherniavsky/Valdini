@@ -1,5 +1,6 @@
 var User = require('../models/userModel'),
     jwt = require('jsonwebtoken'),
+    config = require('../config'),
     log = require('../lib/log')(module);
 
 exports.signup = function (req, res, next) {
@@ -37,7 +38,7 @@ exports.login = function (req, res, next) {
                     username: user.username
                 };
                 console.log(userInfo);
-                var token = jwt.sign(userInfo, 'vlados', {
+                var token = jwt.sign(userInfo, config.get('key'), {
                     expiresIn: '10s'
                 });
                 res.cookie('token', token);

@@ -11,7 +11,9 @@
                 url: '/home',
                 views: {
                     nav: {
-                        templateUrl: 'views/navbar.html'
+                        templateUrl: 'views/navbar.html',
+                        controller: 'CommonController',
+                        controllerAs:'common'
                     },
                     content: {
                         templateUrl: 'views/home.html',

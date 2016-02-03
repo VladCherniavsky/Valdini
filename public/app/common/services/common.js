@@ -3,9 +3,9 @@
         .module('myApp')
         .service('CommonService', CommonService);
 
-    CommonService.$inject = ['$http','$window','$q', '$state'];
+    CommonService.$inject = ['$http','$window','$q', '$state', '$rootScope'];
 
-    function CommonService($http, $window, $q, $state) {
+    function CommonService($http, $window, $q, $state, $rootScope) {
 
         var self = this;
 
@@ -13,7 +13,7 @@
         self.checkToken = checkToken;
         self.clearObj = clearObj;
         self.getToken = getToken;
-        self.redirectToLogin = redirectToLogin;
+        self.logout = logout;
 
 
 
@@ -84,11 +84,17 @@
             }
         }
 
-        function redirectToLogin (data) {
-            if(!data.success) {
+
+        function logout() {
+            return (function () {
+                console.log('log out called');
+                $window.localStorage.clear();
+                $rootScope.loggedIn = false;
                 $state.go('join.login');
-            }
+            }());
+
         }
+
 
 }
 }());

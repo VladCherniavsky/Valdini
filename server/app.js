@@ -11,9 +11,8 @@ var express     = require('express'),
     methodOverride = require('method-override'),
     morgan      = require('morgan'),
     jwt         = require('jsonwebtoken'),
-    config      = require('./config/config'),
+    config = require('./config'),
     favicon = require('serve-favicon');
-
 
 
 
@@ -29,7 +28,7 @@ var app=express();
 
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
-app.use(cookieParser())
+app.use(cookieParser());
 app.use(methodOverride());
 app.use(morgan('dev'));
 app.use(favicon(__dirname + '../../public/assets/favicon.ico'));
@@ -43,13 +42,11 @@ app.use('/api', checkToken);
 app.use(function(err, req, res, next){
     console.log('app.err');
     console.log(err);
-
-
     return res.json({success:false, error: err});
 });
 
-app.listen(3000, function(){
+app.listen(config.get('port'), function(){
     'use strict';
-    console.log('server is running on port 3000');
+    console.log('server is running on port ' + config.get('port'));
 });
 
