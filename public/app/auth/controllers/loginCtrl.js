@@ -11,6 +11,13 @@
         console.log('login called');
         var self = this;
         self.loginUser = loginUser;
+        var a = $state.get();
+        angular.forEach(a, function (val) {
+           var array =  val.name.split('join.');
+            if(array[1]){
+                console.log(array);
+            }
+        });
 
         function loginUser (user) {
             console.log(user);

@@ -1,0 +1,11 @@
+<nav class="navbar navbar-inverse" role="navigation">
+    <div class="navbar-header">{{scope}}}
+        <a class="navbar-brand" ui-sref="home" >{{appliances.data.currentLabel}}</a>
+    </div>
+    <ul class="nav navbar-nav" ng-repeat="item in appliances.data.nestedStates">
+        <li><a ui-sref="{{item.state}}">{{item.label}}</a></li>
+    </ul>
+
+</nav>
+
+<div ui-view name="content"></div>

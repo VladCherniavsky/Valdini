@@ -17,6 +17,9 @@
 
 
 
+
+
+
         function checkAuth () {
             var deferreddd = $q.defer();
             self.getToken()

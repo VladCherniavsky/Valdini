@@ -1,0 +1,10 @@
+<div class="container">
+    <ul class="" ng-repeat="item in appliancesForHome.data.nestedStates">
+        <li><a ui-sref="{{item.state}}">{{item.label}}</a></li>
+    </ul>
+</div>
+
+<br/>
+<br/>
+<div ui-view name="content"></div>
+<div ui-view name="products"></div>
