@@ -4,11 +4,10 @@
         .module('myApp')
         .controller('appliancesForHomeController', appliancesForHomeController);
 
-    appliancesForHomeController.$inject = ['$state', '$scope', 'data'];
+    appliancesForHomeController.$inject = ['data'];
 
-    function appliancesForHomeController ($state, $scope, data) {
+    function appliancesForHomeController (data) {
         var self = this;
-        console.log("dfdsf");
         self.data = data;
     }
 }()) ;

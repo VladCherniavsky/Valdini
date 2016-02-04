@@ -4,9 +4,9 @@
         .module('myApp')
         .controller('AccessoriesController', AccessoriesController);
 
-    AccessoriesController.$inject = ['$state', '$scope', 'data'];
+    AccessoriesController.$inject = ['data'];
 
-    function AccessoriesController ($state, $scope, data) {
+    function AccessoriesController (data) {
         var self = this;
         self.data = data;
     }

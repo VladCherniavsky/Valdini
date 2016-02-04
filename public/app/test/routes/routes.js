@@ -10,11 +10,11 @@
         self.getData = getData ;
 
 
+       // This function return object which contains array of substates for navigation across  application
+       // I used it  in 'resolve'  for each state
         function getData (name, label, $state) {
             var currentName = name;
-            console.log(currentName);
             var currentLabel = label;
-            console.log(currentLabel);
             var allStates = $state.get();
             var nestedStates = [];
             angular.forEach(allStates, function (val) {
@@ -34,13 +34,14 @@
                 }
 
             });
-            console.log(nestedStates);
             return {
                 currentName: currentName,
                 currentLabel: currentLabel,
                 nestedStates: nestedStates
             };
         }
+
+
         $stateProvider
             .state('appliances',
             {

@@ -4,9 +4,9 @@
         .module('myApp')
         .controller('AppliancesCtrl', AppliancesCtrl);
 
-    AppliancesCtrl.$inject = ['$state', '$scope', 'data'];
+    AppliancesCtrl.$inject = ['data'];
 
-    function AppliancesCtrl ($state, $scope, data) {
+    function AppliancesCtrl (data) {
         var self = this;
         self.data = data;
     }

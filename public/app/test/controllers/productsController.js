@@ -4,9 +4,9 @@
         .module('myApp')
         .controller('ProductsController', ProductsController);
 
-    ProductsController.$inject = ['$state', '$scope', 'data'];
+    ProductsController.$inject = [];
 
-    function ProductsController ($state, $scope, data) {
+    function ProductsController () {
         var self = this;
 
         self.products = [];
