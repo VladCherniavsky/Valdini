@@ -46,10 +46,14 @@
             .state('appliances',
             {
                 url: '/appliances',
-                templateUrl: 'app/test/views/appliances.html',
                 label: 'Бытовая техника',
-                controller: 'AppliancesCtrl',
-                controllerAs: 'appliances',
+                views: {
+                    content: {
+                        templateUrl: 'app/test/views/appliances.html',
+                        controller: 'AppliancesCtrl',
+                        controllerAs: 'appliances'
+                    }
+                },
                 resolve: {
                     data: function($state){
                         return self.getData(this.name, this.label, $state);
@@ -61,7 +65,7 @@
                 url: '/forHome',
                 label: 'Техника для дома',
                 views: {
-                    content : {
+                    "content@appliances" : {
                         templateUrl: 'app/test/views/appliancesForHome.html',
                         controller: 'appliancesForHomeController',
                         controllerAs: 'appliancesForHome'
@@ -81,7 +85,7 @@
                 url: '/accessories',
                 label: 'Аксессуары',
                 views: {
-                    content : {
+                    "content@appliances" : {
                         templateUrl: 'app/test/views/accessories.html',
                         controller: 'AccessoriesController',
                         controllerAs: 'accessories'
@@ -99,7 +103,7 @@
                 url: '/forWaterFilter',
                 label: 'Для водяных фильтров',
                 views: {
-                    products : {
+                    "content@appliances"  : {
                         templateUrl: 'app/test/views/products.html',
                         controller: 'ProductsController',
                         controllerAs: 'products'
@@ -129,7 +133,7 @@
                 url: '/irons',
                 label: 'Утюги',
                 views: {
-                    products : {
+                    "content@appliances" : {
                         templateUrl: 'app/test/views/irons.html',
                         controller: 'IronsController',
                         controllerAs: 'irons'
