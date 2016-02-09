@@ -193,12 +193,30 @@ a:focus, a:hover {
 	float: left;
 	color: red;
 }
-/*================scrollbar.html================
+
+/*================uploader.html================
 ==================================== */
-/*::-webkit-scrollbar {
-	background-color: transparent;
+/*.thumb {
+	width: 24px;
+	height: 24px;
+	float: none;
+	position: relative;
+	top: 7px;
 }
-::-webkit-scrollbar-thumb{
-	background-color: #2086bf;
-	border-radius: 5px;
+
+form .progress {
+	line-height: 15px;
+}
+
+
+.progress {
+	display: inline-block;
+	width: 100px;
+	border: 3px groove #CCC;
+}
+
+.progress div {
+	font-size: smaller;
+	background: orange;
+	width: 0;
 }*/

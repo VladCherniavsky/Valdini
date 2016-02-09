@@ -12,6 +12,7 @@ var express     = require('express'),
     morgan      = require('morgan'),
     jwt         = require('jsonwebtoken'),
     config = require('./config'),
+    multer  = require('multer'),
     favicon = require('serve-favicon');
 
 
@@ -21,10 +22,13 @@ var checkToken = require('./lib/checkToken');
 
 
 
-var authRouter = require('./routes/user');
-var fandomsRouter = require('./routes/fandomsRouter');
+
+var authRouter = require('./routes/user'),
+    fandomsRouter = require('./routes/fandomsRouter'),
+    documentRouter = require('./routes/documentRouter');
 
 var app=express();
+var upload = multer();
 
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
@@ -34,7 +38,7 @@ app.use(morgan('dev'));
 app.use(favicon(__dirname + '../../public/assets/favicon.ico'));
 app.use(express.static(__dirname+'../../public'));
 
-
+app.use('/api', documentRouter);
 app.use('/api', fandomsRouter);
 app.use('/api', authRouter);
 

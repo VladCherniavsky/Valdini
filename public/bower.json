@@ -20,6 +20,8 @@
     "tests"
   ],
   "dependencies": {
-    "angular-ui-router": "~0.2.15"
+    "angular-ui-router": "~0.2.15",
+    "angular-file-upload": "^2.2.0",
+    "ng-file-upload": "^11.2.3"
   }
 }
