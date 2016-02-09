@@ -16,6 +16,8 @@
     "bluebird": "^3.1.1",
     "body-parser": "^1.14.2",
     "cookie-parser": "^1.4.1",
+    "csv": "^0.4.6",
+    "csv-parse": "^1.0.1",
     "express": "^4.13.3",
     "jsonwebtoken": "^5.4.1",
     "method-override": "^2.3.5",
