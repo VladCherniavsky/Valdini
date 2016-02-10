@@ -28,7 +28,7 @@ var authRouter = require('./routes/user'),
     documentRouter = require('./routes/documentRouter');
 
 var app=express();
-var upload = multer();
+
 
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
@@ -42,7 +42,7 @@ app.use('/api', documentRouter);
 app.use('/api', fandomsRouter);
 app.use('/api', authRouter);
 
-app.use('/api', checkToken);
+//app.use('/api', checkToken);
 app.use(function(err, req, res, next){
     console.log('app.err');
     console.log(err);

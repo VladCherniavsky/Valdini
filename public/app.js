@@ -1,5 +1,5 @@
 (function(){
     angular
-        .module('myApp', ['ui.router', 'angularFileUpload']);
+        .module('myApp', ['ui.router', 'ngFileUpload', 'nvd3']);
 }());
-//ngFileUpload
+//angularFileUpload
