@@ -46,6 +46,8 @@ app.use('/api', authRouter);
 app.use(function(err, req, res, next){
     console.log('app.err');
     console.log(err);
+    console.log(err);
+
     return res.json({success:false, error: err});
 });
 
