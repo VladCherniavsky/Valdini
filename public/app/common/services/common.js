@@ -15,11 +15,6 @@
         self.getToken = getToken;
         self.logout = logout;
 
-
-
-
-
-
         function checkAuth () {
             var deferreddd = $q.defer();
             self.getToken()
@@ -43,8 +38,6 @@
                 });
             return deferreddd.promise;
         }
-
-
         function checkToken (token){
             return $http({
                 method:'POST',
@@ -68,7 +61,6 @@
                 });
 
         }
-
         function getToken () {
             var token = $window.localStorage.token;
             var deferred = $q.defer();
@@ -80,24 +72,16 @@
             }
             return deferred.promise;
         }
-
         function clearObj (obj){
             for (var prop in obj){
                 obj[prop]='';
             }
         }
-
-
         function logout() {
-            return (function () {
                 console.log('log out called');
                 $window.localStorage.clear();
                 $rootScope.loggedIn = false;
                 $state.go('join.login');
-            }());
-
         }
-
-
-}
+    }
 }());

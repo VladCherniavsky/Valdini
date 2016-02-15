@@ -7,9 +7,9 @@
 
     function runBlock ($rootScope, CommonService, $state) {
         console.log('run');
-       /* CommonService
+        CommonService
             .checkAuth()
-            .then(successHandle, errorHandle);*/
+            .then(successHandle, errorHandle);
 
 
         $rootScope.$on('$stateChangeStart', stateChangeStart);

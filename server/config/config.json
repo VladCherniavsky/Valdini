@@ -4,5 +4,6 @@
     "connection": "mongodb://localhost/userlist",
     "name": "db_name"
   },
-  "key": "vlados"
+  "key": "vlados",
+  "expirationPeriod": "15s"
 }

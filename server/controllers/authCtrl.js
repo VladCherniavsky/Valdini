@@ -39,7 +39,7 @@ exports.login = function (req, res, next) {
                 };
                 console.log(userInfo);
                 var token = jwt.sign(userInfo, config.get('key'), {
-                    expiresIn: '10s'
+                    expiresIn: config.get('expirationPeriod')
                 });
                 res.cookie('token', token);
                 res.json({success: true, message: 'ok',  user: userInfo, token: token});
